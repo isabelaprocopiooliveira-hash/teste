@@ -1,50 +1,51 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Mi primera página</title>
-</head>
-<body>
-
-    <h1>Hola Mundo</h1>
-    <p>¡Bienvenido a mi sitio web!</p>
-
-</body>
-</html>
-<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olá Mundo!</title>
+    <title>Olá Mundo com Estilo</title>
     <style>
-        /* Aqui começa o seu CSS */
+        /* O CSS começa aqui */
         body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
+        }
+
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
         h1 {
             color: #2d3436;
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-            animation: aparecer 2s ease-in-out;
+            margin-bottom: 10px;
         }
 
-        @keyframes aparecer {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        p {
+            color: #636e72;
+        }
+
+        span {
+            color: #0984e3;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <h1>Olá, Mundo!</h1>
+    <div class="card">
+        <h1>Olá, <span>Mundo!</span></h1>
+        <p>Minha primeira página estilizada com CSS.</p>
+    </div>
 
 </body>
 </html>
+
+
