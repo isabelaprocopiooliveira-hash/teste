@@ -3,78 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Olá Mundo - Terra</title>
+  <title>Olá Mundo</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      margin: 0;
       height: 100vh;
       background: #000;
-      color: #0f0;
-      font-family: Arial, Helvetica, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      font-family: Arial, sans-serif;
       overflow: hidden;
     }
 
-    .container {
-      position: relative;
-      width: 320px;
-      height: 320px;
-      perspective: 1000px; /* dá sensação de profundidade */
-    }
-
     .earth {
-      width: 100%;
-      height: 100%;
-      background: url('https://www.nasa.gov/sites/default/files/thumbnails/image/main_image_galaxies_stephans_quintet_sq_nircam_miri_webb.png') no-repeat center center;
-      background-size: cover;
+      width: 280px;
+      height: 280px;
+      background: url('https://svs.gsfc.nasa.gov/vis/a000000/a004500/a004550/BlueMarble_starfield_4k_2160p30_v2.00001_print.jpg') center/cover;
       border-radius: 50%;
       box-shadow: 
-        inset 0 0 80px 20px rgba(0,0,0,0.9),    /* escurece bastante o planeta */
-        0 0 60px 10px rgba(0, 180, 255, 0.15); /* leve brilho azul ao redor */
-      animation: rotate 60s linear infinite;
-      transform-style: preserve-3d;
-    }
-
-    /* Efeito de rotação */
-    @keyframes rotate {
-      from {
-        transform: rotateY(0deg);
-      }
-      to {
-        transform: rotateY(360deg);
-      }
+        inset 0 0 90px 30px rgba(0,0,0,0.85), /* escurece bastante */
+        0 0 70px 15px rgba(0, 140, 255, 0.12); /* leve glow */
+      animation: spin 80s linear infinite;
     }
 
     h1 {
-      margin-top: 40px;
-      font-size: 3.5rem;
-      text-shadow: 0 0 20px #0f0;
-      letter-spacing: 6px;
+      color: white;
+      font-size: 4.5rem;
+      margin: 50px 0 0;
+      text-shadow: 0 0 15px rgba(255,255,255,0.4);
+      letter-spacing: 4px;
     }
 
-    p {
-      margin-top: 10px;
-      font-size: 1.3rem;
-      opacity: 0.8;
+    @keyframes spin {
+      from { transform: rotateY(0deg); }
+      to   { transform: rotateY(360deg); }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="earth"></div>
-  </div>
-
+  <div class="earth"></div>
   <h1>Olá Mundo</h1>
-  <p>2026 - A Terra ainda gira...</p>
 
 </body>
 </html>
