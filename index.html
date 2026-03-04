@@ -1,74 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olá Mundo Espacial</title>
-    <style>
-        /* Reset básico e fundo preto */
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Olá Mundo</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* Container do Planeta */
-        .earth {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_after_correction_for_atmospheric_effects.jpg/1024px-The_Blue_Marble_after_correction_for_atmospheric_effects.jpg');
-            background-size: cover;
-            border-radius: 50%;
-            /* Efeito de sombra para parecer uma esfera iluminada */
-            box-shadow: inset -40px -40px 50px 2px rgba(0, 0, 0, 0.9), 
-                        0 0 20px rgba(52, 152, 219, 0.4);
-            animation: rotateEarth 20s linear infinite;
-            z-index: 1;
-        }
+    body {
+      height: 100vh;
+      background: #000;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
 
-        /* Card de Texto */
-        .card {
-            position: relative;
-            z-index: 2; /* Garante que o texto fique na frente */
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px); /* Efeito de vidro */
-            padding: 2rem 4rem;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-        }
+    /* Planeta de fundo */
+    .earth-bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: url('https://images.unsplash.com/photo-1564053489986-0d7a6d1266b3?w=1200&q=80') center center / cover no-repeat;
+      opacity: 0.08;           /* bem discreto */
+      pointer-events: none;
+      animation: rotate 180s linear infinite;
+      transform-origin: center;
+    }
 
-        h1 {
-            margin: 0;
-            font-size: 3rem;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-        /* Animação de Rotação */
-        @keyframes rotateEarth {
-            from { background-position: 0 0; }
-            to { background-position: 800px 0; }
-        }
-    </style>
+    /* Card central */
+    .card {
+      position: relative;
+      z-index: 2;
+      padding: 3.5rem 5rem;
+      background: rgba(10, 10, 20, 0.65);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid rgba(100, 140, 255, 0.12);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
+      text-align: center;
+      min-width: 380px;
+    }
+
+    h1 {
+      font-size: 5.8rem;
+      font-weight: 300;
+      letter-spacing: 0.4rem;
+      background: linear-gradient(90deg, #a0d8ef, #ffffff, #c9d9ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px rgba(140, 180, 255, 0.4);
+    }
+
+    .subtitle {
+      margin-top: 1.2rem;
+      font-size: 1.4rem;
+      opacity: 0.7;
+      letter-spacing: 2px;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="earth"></div>
+  <div class="earth-bg"></div>
 
-    <div class="card">
-        <h1>Olá Mundo</h1>
-    </div>
+  <div class="card">
+    <h1>Olá Mundo</h1>
+    <div class="subtitle">2026 edition</div>
+  </div>
 
 </body>
 </html>
