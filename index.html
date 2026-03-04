@@ -1,1 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olá Mundo com Estilo e Sistema Solar</title>
+    <style>
+        /* O CSS começa aqui */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
 
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            z-index: 10; /* Para garantir que o card fique acima dos planetas */
+        }
+
+        h1 {
+            color: #2d3436;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #636e72;
+        }
+
+        span {
+            color: #0984e3;
+            font-weight: bold;
+        }
+
+        /* Estilo para o Sistema Solar */
+        .solar-system {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/71/Solar_System_1000x1000.png'); /* Substitua com a imagem do Sistema Solar */
+            background-size: cover;
+            animation: rotate-sun 30s infinite linear;
+        }
+
+        /* Animação de rotação do sistema solar */
+        @keyframes rotate-sun {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Estilo para os planetas */
+        .planet {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #3498db;
+            animation: orbit 10s infinite linear;
+        }
+
+        /* Cada planeta orbita o Sol em uma distância diferente */
+        .planet-1 { 
+            animation-duration: 10s; /* Planeta mais próximo */
+            background-color: #ff6347; /* Cor do Planeta 1 */
+            width: 30px; /* Tamanho do planeta */
+            height: 30px;
+            animation-delay: 0s; 
+        }
+        
+        .planet-2 { 
+            animation-duration: 15s;
+            background-color: #f39c12;
+            width: 40px;
+            height: 40px;
+            animation-delay: 0.5s;
+        }
+
+        .planet-3 { 
+            animation-duration: 20s;
+            background-color: #2ecc71;
+            width: 50px;
+            height: 50px;
+            animation-delay: 1s;
+        }
+
+        .planet-4 { 
+            animation-duration: 25s;
+            background-color: #e74c3c;
+            width: 60px;
+            height: 60px;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg) translateX(100px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translateX(100px) rotate(-360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="solar-system">
+        <div class="planet planet-1"></div>
+        <div class="planet planet-2"></div>
+        <div class="planet planet-3"></div>
+        <div class="planet planet-4"></div>
+    </div>
+
+    <div class="card">
+        <h1>Olá, <span>Mundo!</span></h1>
+        <p>Minha primeira página estilizada com CSS, agora com um Sistema Solar em movimento!</p>
+    </div>
+
+</body>
+</html>
