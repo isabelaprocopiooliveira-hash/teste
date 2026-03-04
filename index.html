@@ -3,130 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olá Mundo com Estilo e Sistema Solar</title>
+    <title>Olá Mundo Espacial</title>
     <style>
-        /* O CSS começa aqui */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f2f5;
+        /* Reset básico e fundo preto */
+        body, html {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
-            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            text-align: center;
-            z-index: 10; /* Para garantir que o card fique acima dos planetas */
+        /* Container do Planeta */
+        .earth {
             position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_after_correction_for_atmospheric_effects.jpg/1024px-The_Blue_Marble_after_correction_for_atmospheric_effects.jpg');
+            background-size: cover;
+            border-radius: 50%;
+            /* Efeito de sombra para parecer uma esfera iluminada */
+            box-shadow: inset -40px -40px 50px 2px rgba(0, 0, 0, 0.9), 
+                        0 0 20px rgba(52, 152, 219, 0.4);
+            animation: rotateEarth 20s linear infinite;
+            z-index: 1;
+        }
+
+        /* Card de Texto */
+        .card {
+            position: relative;
+            z-index: 2; /* Garante que o texto fique na frente */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px); /* Efeito de vidro */
+            padding: 2rem 4rem;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
         }
 
         h1 {
-            color: #2d3436;
-            margin-bottom: 10px;
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        p {
-            color: #636e72;
+        /* Animação de Rotação */
+        @keyframes rotateEarth {
+            from { background-position: 0 0; }
+            to { background-position: 800px 0; }
         }
-
-        span {
-            color: #0984e3;
-            font-weight: bold;
-        }
-
-        /* Estilo para o fundo do Sistema Solar */
-        https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_ToYp_NWzfLHFWWR7ye51j7rpwOplezAcwg&s
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/7/71/Solar_System_1000x1000.png'); /* Substitua com a imagem do Sistema Solar */
-            background-size: cover;
-            background-position: center;
-            transform: translate(-50%, -50%);
-            z-index: -1; /* Colocar o fundo atrás do card */
-        }
-
-        /* Estilo para os planetas */
-        .planet {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #3498db;
-            animation: orbit 10s infinite linear;
-            transform-origin: center;
-        }
-
-        .planet-1 {
-            background-color: #ff6347;
-            width: 30px;
-            height: 30px;
-            animation-duration: 10s;
-            animation-delay: 0s;
-        }
-
-        .planet-2 {
-            background-color: #f39c12;
-            width: 40px;
-            height: 40px;
-            animation-duration: 15s;
-            animation-delay: 0.5s;
-        }
-
-        .planet-3 {
-            background-color: #2ecc71;
-            width: 50px;
-            height: 50px;
-            animation-duration: 20s;
-            animation-delay: 1s;
-        }
-
-        .planet-4 {
-            background-color: #e74c3c;
-            width: 60px;
-            height: 60px;
-            animation-duration: 25s;
-            animation-delay: 1.5s;
-        }
-
-        /* Animação de movimento orbital */
-        @keyframes orbit {
-            0% {
-                transform: rotate(0deg) translateX(100px) rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg) translateX(100px) rotate(-360deg);
-            }
-        }
-
     </style>
 </head>
 <body>
 
-    <!-- Fundo do Sistema Solar -->
-    <div class="solar-system"></div>
+    <div class="earth"></div>
 
-    <!-- Planetas -->
-    <div class="planet planet-1"></div>
-    <div class="planet planet-2"></div>
-    <div class="planet planet-3"></div>
-    <div class="planet planet-4"></div>
-
-    <!-- Card com texto -->
     <div class="card">
-        <h1>Olá, <span>Mundo!</span></h1>
-        <p>Minha primeira página estilizada com CSS, agora com um Sistema Solar em movimento!</p>
+        <h1>Olá Mundo</h1>
     </div>
 
 </body>
