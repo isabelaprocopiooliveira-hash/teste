@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Olá Mundo</title>
-  
+  <title>Olá Mundo - Terra</title>
   <style>
     * {
       margin: 0;
@@ -15,76 +14,67 @@
     body {
       height: 100vh;
       background: #000;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
+      color: #0f0;
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: white;
+      overflow: hidden;
     }
 
-    /* Planeta de fundo */
-    .earth-bg {
-      position: absolute;
+    .container {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      perspective: 1000px; /* dá sensação de profundidade */
+    }
+
+    .earth {
       width: 100%;
       height: 100%;
-      background: url('https://images.unsplash.com/photo-1564053489986-0d7a6d1266b3?w=1200&q=80') center center / cover no-repeat;
-      opacity: 0.08;           /* bem discreto */
-      pointer-events: none;
-      animation: rotate 180s linear infinite;
-      transform-origin: center;
+      background: url('https://www.nasa.gov/sites/default/files/thumbnails/image/main_image_galaxies_stephans_quintet_sq_nircam_miri_webb.png') no-repeat center center;
+      background-size: cover;
+      border-radius: 50%;
+      box-shadow: 
+        inset 0 0 80px 20px rgba(0,0,0,0.9),    /* escurece bastante o planeta */
+        0 0 60px 10px rgba(0, 180, 255, 0.15); /* leve brilho azul ao redor */
+      animation: rotate 60s linear infinite;
+      transform-style: preserve-3d;
     }
 
+    /* Efeito de rotação */
     @keyframes rotate {
       from {
-        transform: rotate(0deg);
+        transform: rotateY(0deg);
       }
       to {
-        transform: rotate(360deg);
+        transform: rotateY(360deg);
       }
-    }
-
-    /* Card central */
-    .card {
-      position: relative;
-      z-index: 2;
-      padding: 3.5rem 5rem;
-      background: rgba(10, 10, 20, 0.65);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      border: 1px solid rgba(100, 140, 255, 0.12);
-      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.8);
-      text-align: center;
-      min-width: 380px;
     }
 
     h1 {
-      font-size: 5.8rem;
-      font-weight: 300;
-      letter-spacing: 0.4rem;
-      background: linear-gradient(90deg, #a0d8ef, #ffffff, #c9d9ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 30px rgba(140, 180, 255, 0.4);
+      margin-top: 40px;
+      font-size: 3.5rem;
+      text-shadow: 0 0 20px #0f0;
+      letter-spacing: 6px;
     }
 
-    .subtitle {
-      margin-top: 1.2rem;
-      font-size: 1.4rem;
-      opacity: 0.7;
-      letter-spacing: 2px;
+    p {
+      margin-top: 10px;
+      font-size: 1.3rem;
+      opacity: 0.8;
     }
   </style>
 </head>
 <body>
 
-  <div class="earth-bg"></div>
-
-  <div class="card">
-    <h1>Olá Mundo</h1>
-    <div class="subtitle">2026 edition</div>
+  <div class="container">
+    <div class="earth"></div>
   </div>
+
+  <h1>Olá Mundo</h1>
+  <p>2026 - A Terra ainda gira...</p>
 
 </body>
 </html>
