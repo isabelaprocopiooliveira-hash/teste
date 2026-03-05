@@ -1,95 +1,107 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Olá Mundo - Minecraft Edition</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Olá Mundo - Terra</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    body {
+      height: 100vh;
+      background: #000;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        body {
-            height: 100vh;
-            background: url('https://i.imgur.com/0Z3Z3Z3.jpg') center/cover no-repeat fixed;
-            /* Essa é a imagem exata da capa da matéria do Olhar Digital */
-            image-rendering: pixelated;
-            font-family: 'Press Start 2P', cursive;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+    /* Container principal com efeito de baixa exposição */
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #0a0a1a 0%, #000 70%);
+    }
 
-        /* Overlay escuro (igual ao estilo da matéria) */
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.65));
-            z-index: 1;
-        }
+    /* Terra girando */
+    .earth-container {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      animation: spin 40s linear infinite;
+      filter: brightness(0.45) contrast(1.1) saturate(0.8);
+      /* baixa exposição + tom meio frio */
+    }
 
-        .container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            color: #fff;
-            text-shadow: 4px 4px 0 #000,
-                         -4px -4px 0 #000,
-                         4px -4px 0 #000,
-                         -4px 4px 0 #000;
-        }
+    .earth {
+      width: 100%;
+      height: 100%;
+      background: url('https://www.pngall.com/wp-content/uploads/2016/04/Earth-PNG-File.png') center/cover no-repeat;
+      border-radius: 50%;
+      box-shadow: 
+        inset 0 0 80px rgba(0,0,0,0.9),
+        0 0 120px rgba(0, 80, 180, 0.15);
+      /* sombra interna + glow azul bem sutil */
+    }
 
-        h1 {
-            font-size: 5rem;
-            margin-bottom: 15px;
-            color: #ffeb3b;
-            text-shadow: 6px 6px 0 #000;
-        }
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
 
-        p {
-            font-size: 1.8rem;
-            margin-bottom: 50px;
-            opacity: 0.95;
-        }
+    /* Card de texto */
+    .card {
+      position: relative;
+      z-index: 10;
+      background: rgba(10, 10, 20, 0.65);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2.8rem 4rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+      text-align: center;
+      max-width: 90%;
+    }
 
-        .botao-minecraft {
-            display: inline-block;
-            padding: 22px 60px;
-            background: #5c4033;
-            color: white;
-            font-size: 2rem;
-            border: 8px solid #000;
-            box-shadow: 0 10px 0 #2c1f19;
-            text-decoration: none;
-            transition: all 0.1s ease;
-        }
+    h1 {
+      font-size: 4.5rem;
+      font-weight: 300;
+      letter-spacing: 8px;
+      background: linear-gradient(90deg, #e0e0ff, #ffffff, #c0c0ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.6rem;
+    }
 
-        .botao-minecraft:hover {
-            transform: translateY(6px);
-            box-shadow: 0 4px 0 #2c1f19;
-        }
-
-        .botao-minecraft:active {
-            transform: translateY(10px);
-            box-shadow: none;
-        }
-    </style>
+    p {
+      font-size: 1.4rem;
+      opacity: 0.85;
+      letter-spacing: 2px;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>OLÁ MUNDO!</h1>
-        <p>Cansou de Minecraft? Aqui tem sempre algo pra fazer 😎</p>
-        <a href="#" class="botao-minecraft">VOLTAR AO JOGO</a>
+
+  <div class="scene">
+    <div class="earth-container">
+      <div class="earth"></div>
     </div>
+
+    <div class="card">
+      <h1>Olá Mundo</h1>
+      <p>daqui da Terra</p>
+    </div>
+  </div>
+
 </body>
 </html>
