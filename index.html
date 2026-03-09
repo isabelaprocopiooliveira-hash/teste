@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minecraft – Estilo Clássico</title>
+  <title>Minecraft – Noite com Creeper e Grama</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -17,151 +17,177 @@
 
     body {
       min-height: 100vh;
+      overflow: hidden;
       font-family: 'VT323', monospace;
-      background: linear-gradient(to bottom, #4a7cac 0%, #6ca0d7 40%, #a8d0ff 100%);
+      background: #0a0e1f;           /* céu noturno escuro */
       color: #e0e0e0;
       image-rendering: pixelated;
-      background-image:
-        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="32" height="32" fill="%23284a6e"/><rect x="32" y="32" width="32" height="32" fill="%23284a6e"/></svg>');
+    }
+
+    /* Estrelas animadas */
+    .stars {
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+      background-size: 70px 70px, 50px 50px;
+      background-position: 0 0, 35px 35px;
+      opacity: 0.75;
+      pointer-events: none;
+      animation: twinkle 25s infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.55; }
+      50%      { opacity: 0.9; }
+    }
+
+    /* Lua */
+    .moon {
+      position: fixed;
+      top: 10%;
+      right: 12%;
+      width: 160px;
+      height: 160px;
+      background: radial-gradient(circle at 35% 35%, #f0f8ff, #c0d0ff 45%, #8090ff);
+      border-radius: 50%;
+      box-shadow: 0 0 60px #a0c0ff, 0 0 120px #6080ff;
+      opacity: 0.92;
+      pointer-events: none;
+    }
+
+    /* Grama no chão */
+    .ground {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 35%;
+      background: url('https://i.imgur.com/5y5p9.png') repeat-x bottom; /* textura de grama clássica (topo) */
       background-size: 64px 64px;
+      image-rendering: pixelated;
+      pointer-events: none;
+    }
+
+    .ground::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, #2a4d1a 0%, transparent 40%);
+      opacity: 0.4;
     }
 
     .container {
       position: relative;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       padding: 2rem;
+      z-index: 10;
     }
 
     .title {
-      font-size: 8rem;
-      color: #fff;
-      text-shadow: 
-        6px 6px 0 #000,
-        -6px -6px 0 #000,
-        6px -6px 0 #000,
-        -6px 6px 0 #000;
-      -webkit-text-stroke: 4px #000;
-      letter-spacing: 8px;
-      line-height: 0.9;
-      margin-bottom: 1rem;
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .subtitle {
-      font-size: 3.2rem;
-      color: #feca3c;
-      text-shadow: 4px 4px 0 #000;
-      -webkit-text-stroke: 2px #000;
-      margin-bottom: 4rem;
-    }
-
-    .menu {
-      background: #3c3c3c;
-      border: 8px solid #555;
-      border-top-color: #777;
-      border-left-color: #777;
-      box-shadow: 0 0 0 8px #222;
-      padding: 2.5rem 4rem;
-      border-radius: 12px;
-      min-width: 420px;
-      text-align: center;
-    }
-
-    .button {
-      display: block;
-      width: 100%;
-      padding: 1.2rem;
-      margin: 1rem 0;
-      font-size: 2.4rem;
-      font-family: 'VT323', monospace;
-      color: white;
-      background: #535353;
-      border: 6px solid #8b8b8b;
-      border-bottom-color: #2f2f2f;
-      border-right-color: #2f2f2f;
-      box-shadow: 0 6px 0 #222;
-      cursor: pointer;
-      transition: all 0.08s;
-      user-select: none;
-    }
-
-    .button:hover {
-      background: #6b6b6b;
-      transform: translateY(2px);
-      box-shadow: 0 4px 0 #222;
-    }
-
-    .button:active {
-      transform: translateY(6px);
-      box-shadow: 0 0 0 #222;
-    }
-
-    .grass {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(to bottom, transparent 30%, #5e8c31 60%, #4a6c24);
+      top: 6%;
+      font-size: 7.5rem;
+      color: #fff;
+      text-shadow: 10px 10px 0 #000, -10px -10px 0 #000;
+      -webkit-text-stroke: 6px #000;
+      letter-spacing: 8px;
+      opacity: 0.8;
       pointer-events: none;
     }
 
-    .creeper-face {
-      position: absolute;
-      top: 10%;
+    .button {
+      padding: 1.5rem 6rem;
+      font-size: 4rem;
+      font-family: 'VT323', monospace;
+      color: white;
+      background: #4a4a4a;
+      border: 12px solid #777;
+      border-top-color: #aaa;
+      border-left-color: #aaa;
+      border-bottom-color: #222;
+      border-right-color: #222;
+      box-shadow: 0 12px 0 #111;
+      cursor: pointer;
+      transition: all 0.1s;
+      user-select: none;
+      text-shadow: 4px 4px 0 #000;
+    }
+
+    .button:hover {
+      background: #606060;
+      transform: translateY(-6px);
+      box-shadow: 0 18px 0 #111;
+    }
+
+    .button:active {
+      transform: translateY(8px);
+      box-shadow: 0 4px 0 #111;
+    }
+
+    /* Creeper grande no fundo */
+    .creeper-big {
+      position: fixed;
+      bottom: 20%;
+      left: 8%;
+      width: 320px;
+      height: 320px;
+      background: url('https://www.vhv.rs/dpng/d/427-4274215_transparent-minecraft-creeper-png-minecraft-creeper-clipart-black.png') center/contain no-repeat;
+      opacity: 0.22;
+      pointer-events: none;
+      transform: scaleX(-1); /* vira pro lado direito */
+      animation: creeperSway 18s infinite ease-in-out;
+    }
+
+    /* Creeper menor no lado direito */
+    .creeper-small {
+      position: fixed;
+      bottom: 28%;
       right: 10%;
       width: 180px;
       height: 180px;
-      background: #0f0;
-      border: 8px solid #000;
-      box-shadow: 0 0 0 8px #222;
-      opacity: 0.25;
-      animation: fadeCreeper 12s infinite;
+      background: url('https://www.vhv.rs/dpng/d/427-4274215_transparent-minecraft-creeper-png-minecraft-creeper-clipart-black.png') center/contain no-repeat;
+      opacity: 0.35;
+      pointer-events: none;
+      animation: creeperSway 14s infinite ease-in-out reverse;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50%      { transform: translateY(-20px); }
-    }
-
-    @keyframes fadeCreeper {
-      0%, 100% { opacity: 0.15; }
-      50%      { opacity: 0.4; }
+    @keyframes creeperSway {
+      0%, 100% { transform: translateX(0) scaleX(-1); }
+      50%      { transform: translateX(40px) scaleX(-1); }
     }
 
     small {
-      margin-top: 3rem;
-      font-size: 1.8rem;
-      color: #aaa;
+      position: absolute;
+      bottom: 2rem;
+      font-size: 1.9rem;
+      color: #777;
       opacity: 0.7;
+      z-index: 10;
     }
   </style>
 </head>
 <body>
 
+  <div class="stars"></div>
+  <div class="moon"></div>
+  <div class="ground"></div>
+
+  <!-- Creepers -->
+  <div class="creeper-big"></div>
+  <div class="creeper-small"></div>
+
   <div class="container">
     <h1 class="title">MINECRAFT</h1>
-    <p class="subtitle">Java Edition</p>
 
-    <div class="menu">
-      <div class="button">Jogar Singleplayer</div>
-      <div class="button">Jogar Multiplayer</div>
-      <div class="button">Minecraft Realms</div>
-      <div class="button">Opções</div>
-      <div class="button">Sair</div>
-    </div>
-
-    <small>Feito com blocos e muito amor pixelado • 2025</small>
-
-    <!-- Creeper de fundo (só pra zuar) -->
-    <div class="creeper-face"></div>
+    <div class="button">JOGAR SINGLEPLAYER</div>
   </div>
 
-  <div class="grass"></div>
+  <small>Cuidado... tem Creeper por aí • Noite no Overworld</small>
 
 </body>
 </html>
