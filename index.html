@@ -3,191 +3,165 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Olá Mundo - Minecraft</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <title>Minecraft – Estilo Clássico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
     body {
-      height: 100vh;
-      background: #0d001a;
+      min-height: 100vh;
+      font-family: 'VT323', monospace;
+      background: linear-gradient(to bottom, #4a7cac 0%, #6ca0d7 40%, #a8d0ff 100%);
       color: #e0e0e0;
-      font-family: 'Press Start 2P', cursive;
-      overflow: hidden;
+      image-rendering: pixelated;
+      background-image:
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect width="32" height="32" fill="%23284a6e"/><rect x="32" y="32" width="32" height="32" fill="%23284a6e"/></svg>');
+      background-size: 64px 64px;
+    }
+
+    .container {
+      position: relative;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      image-rendering: pixelated; /* mantém o estilo pixel perfeito */
+      padding: 2rem;
     }
-    .scene {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: radial-gradient(circle at center, #1a0033 0%, #000 70%);
-      overflow: hidden;
-    }
-    /* Estrelas + partículas estilo Minecraft (quadrados sutis) */
-    .scene::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(#fff 1px, transparent 1px),
-        radial-gradient(#88ff88 1px, transparent 1px);
-      background-size: 60px 60px, 80px 80px;
-      background-position: 0 0, 30px 30px;
-      opacity: 0.08;
-      pointer-events: none;
-      animation: twinkle 120s linear infinite;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.08; }
-      50% { opacity: 0.12; }
-    }
-    /* Overlay sutil de textura dirt/grass (opcional, dá vibe overworld) */
-    .scene::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url('https://www.transparenttextures.com/patterns/dirt.png') repeat;
-      opacity: 0.04;
-      pointer-events: none;
-    }
-    /* Planeta Minecraft-style */
-    .earth-container {
-      position: absolute;
-      width: 340px;
-      height: 340px;
-      animation:
-        spin 140s linear infinite,
-        pulse 24s ease-in-out infinite;
-      filter: brightness(1.1) contrast(1.2) saturate(1.4) drop-shadow(0 0 30px #4caf50);
-    }
-    .earth {
-      width: 100%;
-      height: 100%;
-      background: url('https://www.pngwing.com/en/free-png-bxprj/download') center/cover no-repeat;
-      /* Alternativas boas (testadas em 2026): */
-      /* https://www.hiclipart.com/free-transparent-background-png-clipart-ijvcr (colorful planet minecraft style) */
-      /* Ou use: https://static.wikia.nocookie.net/minecraft_gamepedia/images/2/2e/Earth.png (se disponível) */
-      border-radius: 50%;
-      image-rendering: pixelated;
-      box-shadow:
-        inset 0 0 60px #000,
-        0 0 80px #4caf50aa,
-        0 0 140px #2e7d32aa;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); }
-    }
-    /* Card estilo crafting table / placa de madeira */
-    .card {
-      position: relative;
-      z-index: 10;
-      background: linear-gradient(to bottom, #8b5a2b, #6d4c41);
-      border: 6px solid #3e2723;
-      border-image: url('https://minecraft.wiki/images/Wooden_Planks.png?format=original') 6 stretch;
-      border-radius: 12px;
-      padding: 2.5rem 4rem;
-      box-shadow: 0 10px 40px #000000aa, inset 0 0 20px #00000088;
-      text-align: center;
-      max-width: 85%;
-      opacity: 0;
-      animation: fadeIn 3.5s ease-out 1.2s forwards;
-      image-rendering: pixelated;
-    }
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-    h1 {
-      font-size: 3.8rem;
-      font-weight: normal;
-      letter-spacing: 6px;
-      color: #fff176;
-      text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.1rem;
-      color: #e0e0e0;
-      text-shadow: 2px 2px 0 #000;
-      letter-spacing: 1px;
-    }
-    /* Botão de áudio estilo botão do Minecraft */
-    #audio-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 100;
-      background: #8b5a2b;
+
+    .title {
+      font-size: 8rem;
       color: #fff;
-      border: 4px solid #3e2723;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: 'Press Start 2P', cursive;
-      font-size: 0.9rem;
-      box-shadow: 0 4px 0 #3e2723;
-      transition: transform 0.1s;
+      text-shadow: 
+        6px 6px 0 #000,
+        -6px -6px 0 #000,
+        6px -6px 0 #000,
+        -6px 6px 0 #000;
+      -webkit-text-stroke: 4px #000;
+      letter-spacing: 8px;
+      line-height: 0.9;
+      margin-bottom: 1rem;
+      animation: float 4s ease-in-out infinite;
     }
-    #audio-control:active {
-      transform: translateY(4px);
-      box-shadow: 0 0 0 #3e2723;
+
+    .subtitle {
+      font-size: 3.2rem;
+      color: #feca3c;
+      text-shadow: 4px 4px 0 #000;
+      -webkit-text-stroke: 2px #000;
+      margin-bottom: 4rem;
+    }
+
+    .menu {
+      background: #3c3c3c;
+      border: 8px solid #555;
+      border-top-color: #777;
+      border-left-color: #777;
+      box-shadow: 0 0 0 8px #222;
+      padding: 2.5rem 4rem;
+      border-radius: 12px;
+      min-width: 420px;
+      text-align: center;
+    }
+
+    .button {
+      display: block;
+      width: 100%;
+      padding: 1.2rem;
+      margin: 1rem 0;
+      font-size: 2.4rem;
+      font-family: 'VT323', monospace;
+      color: white;
+      background: #535353;
+      border: 6px solid #8b8b8b;
+      border-bottom-color: #2f2f2f;
+      border-right-color: #2f2f2f;
+      box-shadow: 0 6px 0 #222;
+      cursor: pointer;
+      transition: all 0.08s;
+      user-select: none;
+    }
+
+    .button:hover {
+      background: #6b6b6b;
+      transform: translateY(2px);
+      box-shadow: 0 4px 0 #222;
+    }
+
+    .button:active {
+      transform: translateY(6px);
+      box-shadow: 0 0 0 #222;
+    }
+
+    .grass {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent 30%, #5e8c31 60%, #4a6c24);
+      pointer-events: none;
+    }
+
+    .creeper-face {
+      position: absolute;
+      top: 10%;
+      right: 10%;
+      width: 180px;
+      height: 180px;
+      background: #0f0;
+      border: 8px solid #000;
+      box-shadow: 0 0 0 8px #222;
+      opacity: 0.25;
+      animation: fadeCreeper 12s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-20px); }
+    }
+
+    @keyframes fadeCreeper {
+      0%, 100% { opacity: 0.15; }
+      50%      { opacity: 0.4; }
+    }
+
+    small {
+      margin-top: 3rem;
+      font-size: 1.8rem;
+      color: #aaa;
+      opacity: 0.7;
     }
   </style>
 </head>
 <body>
-  <div class="scene">
-    <div class="earth-container">
-      <div class="earth"></div>
+
+  <div class="container">
+    <h1 class="title">MINECRAFT</h1>
+    <p class="subtitle">Java Edition</p>
+
+    <div class="menu">
+      <div class="button">Jogar Singleplayer</div>
+      <div class="button">Jogar Multiplayer</div>
+      <div class="button">Minecraft Realms</div>
+      <div class="button">Opções</div>
+      <div class="button">Sair</div>
     </div>
-    <div class="card">
-      <h1>OLÁ MUNDO</h1>
-      <!-- <p>Carregando chunks... ☁️</p> --> <!-- opcional, bem Minecraft -->
-    </div>
+
+    <small>Feito com blocos e muito amor pixelado • 2025</small>
+
+    <!-- Creeper de fundo (só pra zuar) -->
+    <div class="creeper-face"></div>
   </div>
 
-  <!-- Áudio ambiente Minecraft-style (C418 vibes) -->
-  <audio id="ambientSound" loop autoplay>
-    <source src="minecraft-ambient.mp3" type="audio/mpeg">
-    Seu navegador não suporta áudio.
-  </audio>
+  <div class="grass"></div>
 
-  <button id="audio-control">🎵 Som on</button>
-
-  <script>
-    const audio = document.getElementById('ambientSound');
-    const control = document.getElementById('audio-control');
-
-    audio.volume = 0.18; // baixinho, como no jogo
-
-    control.addEventListener('click', () => {
-      if (audio.paused || audio.muted) {
-        audio.muted = false;
-        audio.play().catch(() => {});
-        control.textContent = '🎵 Som on';
-      } else {
-        audio.muted = true;
-        control.textContent = '🔇 Som off';
-      }
-    });
-
-    audio.addEventListener('canplay', () => {
-      audio.play().catch(() => {
-        control.textContent = '🔇 Toque para ouvir';
-      });
-    });
-  </script>
 </body>
 </html>
