@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minecraft – Noite com Creeper e Grama</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
-
+  <title>Abismo - Fundo do Mar Profundo</title>
   <style>
     * {
       margin: 0;
@@ -16,178 +12,261 @@
     }
 
     body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0e1f;
+      color: #b3d4fc;
       min-height: 100vh;
-      overflow: hidden;
-      font-family: 'VT323', monospace;
-      background: #0a0e1f;           /* céu noturno escuro */
-      color: #e0e0e0;
-      image-rendering: pixelated;
-    }
-
-    /* Estrelas animadas */
-    .stars {
-      position: fixed;
-      inset: 0;
-      background: 
-        radial-gradient(white 1px, transparent 1px),
-        radial-gradient(white 1px, transparent 1px);
-      background-size: 70px 70px, 50px 50px;
-      background-position: 0 0, 35px 35px;
-      opacity: 0.75;
-      pointer-events: none;
-      animation: twinkle 25s infinite alternate;
-    }
-
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.55; }
-      50%      { opacity: 0.9; }
-    }
-
-    /* Lua */
-    .moon {
-      position: fixed;
-      top: 10%;
-      right: 12%;
-      width: 160px;
-      height: 160px;
-      background: radial-gradient(circle at 35% 35%, #f0f8ff, #c0d0ff 45%, #8090ff);
-      border-radius: 50%;
-      box-shadow: 0 0 60px #a0c0ff, 0 0 120px #6080ff;
-      opacity: 0.92;
-      pointer-events: none;
-    }
-
-    /* Grama no chão */
-    .ground {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 35%;
-      background: url('https://i.imgur.com/5y5p9.png') repeat-x bottom; /* textura de grama clássica (topo) */
-      background-size: 64px 64px;
-      image-rendering: pixelated;
-      pointer-events: none;
-    }
-
-    .ground::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, #2a4d1a 0%, transparent 40%);
-      opacity: 0.4;
-    }
-
-    .container {
+      overflow-x: hidden;
       position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      z-index: 10;
     }
 
-    .title {
+    /* Partículas / plâncton bioluminescente */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
       position: absolute;
-      top: 6%;
-      font-size: 7.5rem;
-      color: #fff;
-      text-shadow: 10px 10px 0 #000, -10px -10px 0 #000;
-      -webkit-text-stroke: 6px #000;
-      letter-spacing: 8px;
-      opacity: 0.8;
-      pointer-events: none;
+      background: #a5d8ff;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #60a5fa, 0 0 24px #3b82f6;
+      opacity: 0.15;
+      animation: drift linear infinite;
     }
 
-    .button {
-      padding: 1.5rem 6rem;
-      font-size: 4rem;
-      font-family: 'VT323', monospace;
-      color: white;
-      background: #4a4a4a;
-      border: 12px solid #777;
-      border-top-color: #aaa;
-      border-left-color: #aaa;
-      border-bottom-color: #222;
-      border-right-color: #222;
-      box-shadow: 0 12px 0 #111;
-      cursor: pointer;
-      transition: all 0.1s;
-      user-select: none;
-      text-shadow: 4px 4px 0 #000;
+    @keyframes drift {
+      0%   { transform: translate(0, 100vh) scale(0.4); opacity: 0; }
+      10%  { opacity: 0.6; }
+      90%  { opacity: 0.4; }
+      100% { transform: translate(calc(50vw - 50%), -150px) scale(0.8); opacity: 0; }
     }
 
-    .button:hover {
-      background: #606060;
-      transform: translateY(-6px);
-      box-shadow: 0 18px 0 #111;
-    }
-
-    .button:active {
-      transform: translateY(8px);
-      box-shadow: 0 4px 0 #111;
-    }
-
-    /* Creeper grande no fundo */
-    .creeper-big {
+    /* Peixes nadando (SVG animados) */
+    .fish-container {
       position: fixed;
-      bottom: 20%;
-      left: 8%;
-      width: 320px;
-      height: 320px;
-      background: url('https://www.vhv.rs/dpng/d/427-4274215_transparent-minecraft-creeper-png-minecraft-creeper-clipart-black.png') center/contain no-repeat;
-      opacity: 0.22;
+      inset: 0;
       pointer-events: none;
-      transform: scaleX(-1); /* vira pro lado direito */
-      animation: creeperSway 18s infinite ease-in-out;
+      z-index: 2;
+      overflow: hidden;
     }
 
-    /* Creeper menor no lado direito */
-    .creeper-small {
-      position: fixed;
-      bottom: 28%;
-      right: 10%;
-      width: 180px;
-      height: 180px;
-      background: url('https://www.vhv.rs/dpng/d/427-4274215_transparent-minecraft-creeper-png-minecraft-creeper-clipart-black.png') center/contain no-repeat;
+    .fish {
+      position: absolute;
+      width: 80px;
+      height: 40px;
       opacity: 0.35;
-      pointer-events: none;
-      animation: creeperSway 14s infinite ease-in-out reverse;
+      animation: swim linear infinite;
+      filter: drop-shadow(0 0 10px #60a5fa);
     }
 
-    @keyframes creeperSway {
-      0%, 100% { transform: translateX(0) scaleX(-1); }
-      50%      { transform: translateX(40px) scaleX(-1); }
+    .fish path {
+      fill: #1e3a8a;
+      stroke: #60a5fa;
+      stroke-width: 2;
     }
 
-    small {
-      position: absolute;
-      bottom: 2rem;
-      font-size: 1.9rem;
-      color: #777;
-      opacity: 0.7;
+    .fish.glow path {
+      fill: #0f172a;
+      stroke: #a5b4fc;
+      filter: url(#glow);
+    }
+
+    @keyframes swim {
+      0%   { transform: translate(-120px, 30vh) rotate(0deg); }
+      100% { transform: translate(120vw, 70vh) rotate(5deg); }
+    }
+
+    @keyframes swim-reverse {
+      0%   { transform: translate(120vw, 60vh) rotate(180deg); }
+      100% { transform: translate(-120px, 20vh) rotate(175deg); }
+    }
+
+    header {
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
       z-index: 10;
+    }
+
+    h1 {
+      font-size: 5rem;
+      letter-spacing: 6px;
+      text-shadow: 0 0 30px #1e40af, 0 0 60px #1e3a8a;
+      background: linear-gradient(90deg, #60a5fa, #a5b4fc, #c084fc, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: title-glow 8s ease-in-out infinite;
+    }
+
+    @keyframes title-glow {
+      0%, 100% { opacity: 0.9; text-shadow: 0 0 30px #1e40af; }
+      50%      { opacity: 1;   text-shadow: 0 0 60px #3b82f6, 0 0 100px #1e3a8a; }
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      opacity: 0.8;
+      max-width: 800px;
+      margin: 20px auto;
+      line-height: 1.6;
+    }
+
+    .abyss-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid #1e40af44;
+      border-radius: 16px;
+      margin: 40px 0;
+      padding: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 40px #00000088;
+      transition: all 0.4s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: #60a5fa88;
+      box-shadow: 0 20px 60px #1e40af44;
+    }
+
+    .card h2 {
+      color: #93c5fd;
+      margin-bottom: 16px;
+      font-size: 2.2rem;
+      text-shadow: 0 0 15px #1e40af;
+    }
+
+    .card p {
+      line-height: 1.7;
+      opacity: 0.9;
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+      opacity: 0.6;
+      font-size: 0.95rem;
+    }
+
+    /* Filtro de glow para bioluminescência */
+    svg defs {
+      position: absolute;
     }
   </style>
 </head>
 <body>
 
-  <div class="stars"></div>
-  <div class="moon"></div>
-  <div class="ground"></div>
+<svg width="0" height="0">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
 
-  <!-- Creepers -->
-  <div class="creeper-big"></div>
-  <div class="creeper-small"></div>
+<div class="particles" id="particles"></div>
+<div class="fish-container" id="fishContainer"></div>
 
-  <div class="container">
-    <h1 class="title">MINECRAFT</h1>
+<header>
+  <h1>Abismo</h1>
+  <p class="subtitle">
+    Nas profundezas onde a luz nunca chega, criaturas antigas brilham com luz própria...  
+    e observam quem ousa descer.
+  </p>
+</header>
 
-    <div class="button">JOGAR SINGLEPLAYER</div>
+<div class="abyss-container">
+
+  <div class="card">
+    <h2>Peixe-diabo-negro (Anglerfish)</h2>
+    <p>
+      No vazio absoluto do abismo, seu isca bioluminescente dança na escuridão. 
+      Um lampejo frio atrai presas curiosas... e famintas. Seus dentes como lâminas 
+      não perdoam quem se aproxima demais.
+    </p>
   </div>
 
-  <small>Cuidado... tem Creeper por aí • Noite no Overworld</small>
+  <div class="card">
+    <h2>Medusas Abissais</h2>
+    <p>
+      Flutuam silenciosas, quase fantasmas. Seus tentáculos de quilômetros brilham 
+      em tons de azul espectral. Tocá-las é convidar um veneno lento e inevitável.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Lulas Vampiro</h2>
+    <p>
+      Não sugam sangue — mas sua aparência enganosa já matou de medo muitos exploradores. 
+      Seus olhos enormes captam o mínimo brilho na escuridão total.
+    </p>
+  </div>
+
+</div>
+
+<footer>
+  <p>Profundezas • 2026 • Cuidado com o que brilha na escuridão</p>
+</footer>
+
+<script>
+// Partículas bioluminescentes (plâncton)
+function createParticle() {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  const size = Math.random() * 5 + 2;
+  p.style.width = p.style.height = size + 'px';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (Math.random() * 40 + 30) + 's';
+  p.style.animationDelay = Math.random() * 10 + 's';
+  document.getElementById('particles').appendChild(p);
+  setTimeout(() => p.remove(), 80000);
+}
+
+setInterval(createParticle, 800);
+for(let i = 0; i < 40; i++) createParticle();
+
+// Peixes nadando
+function createFish() {
+  const fish = document.createElement('div');
+  fish.classList.add('fish');
+  const isGlow = Math.random() > 0.6;
+  if (isGlow) fish.classList.add('glow');
+
+  fish.innerHTML = `
+    <svg viewBox="0 0 100 50">
+      <path d="M 10 25 Q 30 5, 70 25 Q 30 45, 10 25 Z" />
+      <path d="M 70 25 L 90 15 L 90 35 Z" fill="#1e3a8a" />
+      <circle cx="25" cy="22" r="4" fill="#eff6ff" opacity="0.7"/>
+    </svg>
+  `;
+
+  const top = Math.random() * 90 + 5;
+  fish.style.top = top + 'vh';
+  fish.style.animation = (Math.random() > 0.5 ? 'swim' : 'swim-reverse') + ' ' + 
+                         (Math.random() * 40 + 35) + 's linear infinite';
+  fish.style.animationDelay = Math.random() * 10 + 's';
+
+  document.getElementById('fishContainer').appendChild(fish);
+  setTimeout(() => fish.remove(), 60000);
+}
+
+setInterval(createFish, 2200);
+for(let i = 0; i < 8; i++) createFish();
+</script>
 
 </body>
 </html>
