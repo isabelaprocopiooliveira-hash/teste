@@ -3,14 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abismo - Fundo do Mar Profundo</title>
+  <title>Abismo - Enciclopédia do Mar Profundo</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
       background: #0a0e1f;
@@ -20,148 +15,81 @@
       position: relative;
     }
 
-    /* Partículas / plâncton bioluminescente */
-    .particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-
+    /* Partículas bioluminescentes */
+    .particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
     .particle {
-      position: absolute;
-      background: #a5d8ff;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #60a5fa, 0 0 24px #3b82f6;
-      opacity: 0.15;
-      animation: drift linear infinite;
+      position:absolute; background:#a5d8ff; border-radius:50%;
+      box-shadow:0 0 12px #60a5fa, 0 0 24px #3b82f6; opacity:0.15;
+      animation:drift linear infinite;
     }
-
     @keyframes drift {
-      0%   { transform: translate(0, 100vh) scale(0.4); opacity: 0; }
-      10%  { opacity: 0.6; }
-      90%  { opacity: 0.4; }
-      100% { transform: translate(calc(50vw - 50%), -150px) scale(0.8); opacity: 0; }
+      0% { transform:translate(0,100vh) scale(0.4); opacity:0; }
+      10% { opacity:0.6; } 90% { opacity:0.4; }
+      100% { transform:translate(calc(50vw - 50%),-150px) scale(0.8); opacity:0; }
     }
 
-    /* Peixes nadando (SVG animados) */
-    .fish-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-      overflow: hidden;
-    }
-
+    /* Peixes nadando */
+    .fish-container { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
     .fish {
-      position: absolute;
-      width: 80px;
-      height: 40px;
-      opacity: 0.35;
-      animation: swim linear infinite;
-      filter: drop-shadow(0 0 10px #60a5fa);
+      position:absolute; width:80px; height:40px; opacity:0.35;
+      animation:swim linear infinite; filter:drop-shadow(0 0 10px #60a5fa);
     }
-
-    .fish path {
-      fill: #1e3a8a;
-      stroke: #60a5fa;
-      stroke-width: 2;
-    }
-
-    .fish.glow path {
-      fill: #0f172a;
-      stroke: #a5b4fc;
-      filter: url(#glow);
-    }
-
-    @keyframes swim {
-      0%   { transform: translate(-120px, 30vh) rotate(0deg); }
-      100% { transform: translate(120vw, 70vh) rotate(5deg); }
-    }
-
-    @keyframes swim-reverse {
-      0%   { transform: translate(120vw, 60vh) rotate(180deg); }
-      100% { transform: translate(-120px, 20vh) rotate(175deg); }
-    }
+    .fish path { fill:#1e3a8a; stroke:#60a5fa; stroke-width:2; }
+    .fish.glow path { fill:#0f172a; stroke:#a5b4fc; filter:url(#glow); }
+    @keyframes swim { 0% { transform:translate(-120px,30vh) rotate(0deg); } 100% { transform:translate(120vw,70vh) rotate(5deg); } }
+    @keyframes swim-reverse { 0% { transform:translate(120vw,60vh) rotate(180deg); } 100% { transform:translate(-120px,20vh) rotate(175deg); } }
 
     header {
-      text-align: center;
-      padding: 120px 20px 80px;
-      position: relative;
-      z-index: 10;
+      text-align:center; padding:120px 20px 60px; position:relative; z-index:10;
     }
-
     h1 {
-      font-size: 5rem;
-      letter-spacing: 6px;
-      text-shadow: 0 0 30px #1e40af, 0 0 60px #1e3a8a;
-      background: linear-gradient(90deg, #60a5fa, #a5b4fc, #c084fc, #60a5fa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: title-glow 8s ease-in-out infinite;
+      font-size:5rem; letter-spacing:6px;
+      text-shadow:0 0 30px #1e40af, 0 0 60px #1e3a8a;
+      background:linear-gradient(90deg, #60a5fa, #a5b4fc, #c084fc, #60a5fa);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      animation:title-glow 8s ease-in-out infinite;
+    }
+    @keyframes title-glow { 0%,100% { opacity:0.9; text-shadow:0 0 30px #1e40af; } 50% { opacity:1; text-shadow:0 0 60px #3b82f6, 0 0 100px #1e3a8a; } }
+
+    .subtitle { font-size:1.5rem; opacity:0.8; max-width:800px; margin:20px auto; line-height:1.6; }
+
+    /* Lista de animais marinhos */
+    .animals-list {
+      max-width:1100px; margin:0 auto 60px; padding:0 20px; position:relative; z-index:10;
+      columns: 3; column-gap: 40px; /* 3 colunas para ficar bonito */
+    }
+    .animals-list h2 {
+      font-size:2.2rem; color:#93c5fd; text-shadow:0 0 15px #1e40af;
+      margin:20px 0 10px; break-after:avoid-column; grid-column:1 / -1; /* Título ocupa toda largura */
+    }
+    .animals-list ul {
+      list-style:none; margin:0; padding:0;
+    }
+    .animals-list li {
+      margin:6px 0; break-inside:avoid;
+    }
+    .animals-list a {
+      color:#93c5fd; text-decoration:none; opacity:0.9;
+      transition:all 0.3s;
+    }
+    .animals-list a:hover {
+      color:#60a5fa; text-shadow:0 0 10px #60a5fa; opacity:1;
     }
 
-    @keyframes title-glow {
-      0%, 100% { opacity: 0.9; text-shadow: 0 0 30px #1e40af; }
-      50%      { opacity: 1;   text-shadow: 0 0 60px #3b82f6, 0 0 100px #1e3a8a; }
-    }
-
-    .subtitle {
-      font-size: 1.5rem;
-      opacity: 0.8;
-      max-width: 800px;
-      margin: 20px auto;
-      line-height: 1.6;
-    }
-
-    .abyss-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px 80px;
-      position: relative;
-      z-index: 10;
-    }
-
+    .abyss-container { max-width:1100px; margin:0 auto; padding:0 20px 80px; position:relative; z-index:10; }
     .card {
-      background: rgba(15, 23, 42, 0.65);
-      border: 1px solid #1e40af44;
-      border-radius: 16px;
-      margin: 40px 0;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 40px #00000088;
-      transition: all 0.4s ease;
+      background:rgba(15,23,42,0.65); border:1px solid #1e40af44; border-radius:16px;
+      margin:40px 0; padding:30px; backdrop-filter:blur(10px);
+      box-shadow:0 10px 40px #00000088; transition:all 0.4s ease;
     }
+    .card:hover { transform:translateY(-10px); border-color:#60a5fa88; box-shadow:0 20px 60px #1e40af44; }
+    .card h2 { color:#93c5fd; margin-bottom:16px; font-size:2.2rem; text-shadow:0 0 15px #1e40af; }
+    .card p { line-height:1.7; opacity:0.9; }
 
-    .card:hover {
-      transform: translateY(-10px);
-      border-color: #60a5fa88;
-      box-shadow: 0 20px 60px #1e40af44;
-    }
+    footer { text-align:center; padding:60px 20px; opacity:0.6; font-size:0.95rem; }
 
-    .card h2 {
-      color: #93c5fd;
-      margin-bottom: 16px;
-      font-size: 2.2rem;
-      text-shadow: 0 0 15px #1e40af;
-    }
-
-    .card p {
-      line-height: 1.7;
-      opacity: 0.9;
-    }
-
-    footer {
-      text-align: center;
-      padding: 60px 20px;
-      opacity: 0.6;
-      font-size: 0.95rem;
-    }
-
-    /* Filtro de glow para bioluminescência */
-    svg defs {
-      position: absolute;
-    }
+    /* Glow filter */
+    svg defs { position:absolute; }
   </style>
 </head>
 <body>
@@ -184,46 +112,100 @@
 <header>
   <h1>Abismo</h1>
   <p class="subtitle">
-    Nas profundezas onde a luz nunca chega, criaturas antigas brilham com luz própria...  
-    e observam quem ousa descer.
+    Nas profundezas onde a luz se extingue, milhares de criaturas sobrevivem na escuridão eterna.<br>
+    Clique em qualquer nome abaixo para descobrir seus segredos na Wikipedia.
   </p>
 </header>
 
-<div class="abyss-container">
+<!-- Lista de animais marinhos A-Z -->
+<div class="animals-list">
+  <h2>Animais Marinhos A–Z</h2>
 
+  <ul>
+    <li><a href="https://pt.wikipedia.org/wiki/Abalone" target="_blank">Abalone</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Anglerfish" target="_blank">Anglerfish (Peixe-diabo)</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/An%C3%AAmona-do-mar" target="_blank">Anêmona-do-mar</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Arraia" target="_blank">Arraia</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Baleia-azul" target="_blank">Baleia-azul</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Baleia-jubarte" target="_blank">Baleia-jubarte</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Barracuda" target="_blank">Barracuda</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Beluga" target="_blank">Beluga</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Camar%C3%A3o" target="_blank">Camarão</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Cavalo-marinho" target="_blank">Cavalo-marinho</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Choco" target="_blank">Choco</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Coral" target="_blank">Coral</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Caranguejo" target="_blank">Caranguejo</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Delfim" target="_blank">Delfim</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Estrela-do-mar" target="_blank">Estrela-do-mar</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Golfinho" target="_blank">Golfinho</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Lula" target="_blank">Lula</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Lula-vampiro" target="_blank">Lula-vampiro</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Medusa" target="_blank">Medusa</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Mor%C3%A9ia" target="_blank">Moréia</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Ouriço-do-mar" target="_blank">Ouriço-do-mar</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Polvo" target="_blank">Polvo</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Peixe-palha%C3%A7o" target="_blank">Peixe-palhaço</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Peixe-boi" target="_blank">Peixe-boi</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Pinguim" target="_blank">Pinguim (espécies marinhas)</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Robalo" target="_blank">Robalo</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Sardinha" target="_blank">Sardinha</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Tartaruga-marinha" target="_blank">Tartaruga-marinha</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Tubar%C3%A3o" target="_blank">Tubarão</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Tubar%C3%A3o-branco" target="_blank">Tubarão-branco</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Viperfish" target="_blank">Viperfish</a></li>
+    <!-- Continuando com mais... -->
+    <li><a href="https://pt.wikipedia.org/wiki/Atum" target="_blank">Atum</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Bluefish" target="_blank">Bluefish</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Cachalote" target="_blank">Cachalote</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Camar%C3%A3o-mantis" target="_blank">Camarão-mantis</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Comb_jelly" target="_blank">Comb jelly</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Craca" target="_blank">Craca</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Dugongo" target="_blank">Dugongo</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Frigate_mackerel" target="_blank">Frigate mackerel</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Foca" target="_blank">Foca</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Giant_squid" target="_blank">Lula-gigante</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Humpback_anglerfish" target="_blank">Humpback anglerfish</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Le%C3%A3o-marinho" target="_blank">Leão-marinho</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Manta_ray" target="_blank">Manta ray</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Narval" target="_blank">Narval</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Nautilus" target="_blank">Nautilus</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Orca" target="_blank">Orca</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Pinguim-imperador" target="_blank">Pinguim-imperador</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Sea_angel" target="_blank">Sea angel</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Sereia_(mitologia)" target="_blank">Sereia (mito, mas link relacionado)</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Sea_cucumber" target="_blank">Sea cucumber</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Siri" target="_blank">Siri</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Stonefish" target="_blank">Stonefish</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Tubar%C3%A3o-baleia" target="_blank">Tubarão-baleia</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/Vampire_squid" target="_blank">Vampire squid</a></li>
+    <li><a href="https://pt.wikipedia.org/wiki/Walrus" target="_blank">Morsa</a></li>
+    <!-- Pode adicionar mais se quiser, mas evitei ficar gigante demais -->
+  </ul>
+</div>
+
+<div class="abyss-container">
   <div class="card">
-    <h2>Peixe-diabo-negro (Anglerfish)</h2>
-    <p>
-      No vazio absoluto do abismo, seu isca bioluminescente dança na escuridão. 
-      Um lampejo frio atrai presas curiosas... e famintas. Seus dentes como lâminas 
-      não perdoam quem se aproxima demais.
-    </p>
+    <h2>Exploração do Abismo</h2>
+    <p>A lista acima é apenas uma pequena fração das centenas de milhares de espécies marinhas conhecidas. Clique nos nomes para ler tudo sobre eles na Wikipedia — desde hábitos, habitat, bioluminescência até ameaças de extinção.</p>
   </div>
 
   <div class="card">
-    <h2>Medusas Abissais</h2>
-    <p>
-      Flutuam silenciosas, quase fantasmas. Seus tentáculos de quilômetros brilham 
-      em tons de azul espectral. Tocá-las é convidar um veneno lento e inevitável.
-    </p>
+    <h2>Peixe-diabo-negro (Anglerfish)</h2>
+    <p>No vazio absoluto, sua isca bioluminescente atrai presas... e morte certa.</p>
   </div>
 
   <div class="card">
     <h2>Lulas Vampiro</h2>
-    <p>
-      Não sugam sangue — mas sua aparência enganosa já matou de medo muitos exploradores. 
-      Seus olhos enormes captam o mínimo brilho na escuridão total.
-    </p>
+    <p>Olhos enormes captam o mínimo brilho na escuridão total. Sobreviventes do abismo.</p>
   </div>
-
 </div>
 
 <footer>
-  <p>Profundezas • 2026 • Cuidado com o que brilha na escuridão</p>
+  <p>Profundezas do Oceano • 2026 • Mergulhe com cuidado</p>
 </footer>
 
 <script>
-// Partículas bioluminescentes (plâncton)
+// Partículas
 function createParticle() {
   const p = document.createElement('div');
   p.classList.add('particle');
@@ -235,37 +217,23 @@ function createParticle() {
   document.getElementById('particles').appendChild(p);
   setTimeout(() => p.remove(), 80000);
 }
-
 setInterval(createParticle, 800);
-for(let i = 0; i < 40; i++) createParticle();
+for(let i=0; i<40; i++) createParticle();
 
-// Peixes nadando
+// Peixes
 function createFish() {
   const fish = document.createElement('div');
   fish.classList.add('fish');
-  const isGlow = Math.random() > 0.6;
-  if (isGlow) fish.classList.add('glow');
-
-  fish.innerHTML = `
-    <svg viewBox="0 0 100 50">
-      <path d="M 10 25 Q 30 5, 70 25 Q 30 45, 10 25 Z" />
-      <path d="M 70 25 L 90 15 L 90 35 Z" fill="#1e3a8a" />
-      <circle cx="25" cy="22" r="4" fill="#eff6ff" opacity="0.7"/>
-    </svg>
-  `;
-
-  const top = Math.random() * 90 + 5;
-  fish.style.top = top + 'vh';
-  fish.style.animation = (Math.random() > 0.5 ? 'swim' : 'swim-reverse') + ' ' + 
-                         (Math.random() * 40 + 35) + 's linear infinite';
+  if(Math.random() > 0.6) fish.classList.add('glow');
+  fish.innerHTML = `<svg viewBox="0 0 100 50"><path d="M 10 25 Q 30 5, 70 25 Q 30 45, 10 25 Z" /><path d="M 70 25 L 90 15 L 90 35 Z" fill="#1e3a8a" /><circle cx="25" cy="22" r="4" fill="#eff6ff" opacity="0.7"/></svg>`;
+  fish.style.top = (Math.random() * 90 + 5) + 'vh';
+  fish.style.animation = (Math.random() > 0.5 ? 'swim' : 'swim-reverse') + ' ' + (Math.random() * 40 + 35) + 's linear infinite';
   fish.style.animationDelay = Math.random() * 10 + 's';
-
   document.getElementById('fishContainer').appendChild(fish);
   setTimeout(() => fish.remove(), 60000);
 }
-
 setInterval(createFish, 2200);
-for(let i = 0; i < 8; i++) createFish();
+for(let i=0; i<8; i++) createFish();
 </script>
 
 </body>
