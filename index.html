@@ -1,6 +1,4 @@
-nset:0; pointer-events:none; z-index:1; }
-    .particle {
-      position:absolute; background:#<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
@@ -16,8 +14,9 @@ nset:0; pointer-events:none; z-index:1; }
       overflow-x: hidden;
       position: relative;
     }
-
-    .particles { position:fixed; ia5d8ff; border-radius:50%;
+    .particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
+    .particle {
+      position:absolute; background:#60a5fa; border-radius:50%;
       box-shadow:0 0 12px #60a5fa, 0 0 24px #3b82f6; opacity:0.12;
       animation:drift linear infinite;
     }
@@ -26,7 +25,6 @@ nset:0; pointer-events:none; z-index:1; }
       15% { opacity:0.5; } 85% { opacity:0.3; }
       100% { transform:translate(calc(40vw - 50%),-200px) scale(0.7); opacity:0; }
     }
-
     .whale-container { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
     .whale {
       position:absolute; width:220px; height:80px; opacity:0.25;
@@ -36,7 +34,6 @@ nset:0; pointer-events:none; z-index:1; }
     .whale.glow path { fill:#001233; stroke:#93c5fd; filter:url(#glow); }
     @keyframes whale-swim { 0% { transform:translate(-300px,20vh) rotate(-2deg); } 100% { transform:translate(120vw,80vh) rotate(2deg); } }
     @keyframes whale-swim-slow { 0% { transform:translate(120vw,50vh) rotate(180deg); } 100% { transform:translate(-300px,30vh) rotate(178deg); } }
-
     header {
       text-align:center; padding:140px 20px 60px; position:relative; z-index:10;
     }
@@ -48,20 +45,7 @@ nset:0; pointer-events:none; z-index:1; }
       animation:title-glow 10s ease-in-out infinite;
     }
     @keyframes title-glow { 0%,100% { opacity:0.85; text-shadow:0 0 40px #1e40af; } 50% { opacity:1; text-shadow:0 0 80px #3b82f6, 0 0 120px #1e3a8a; } }
-
     .subtitle { font-size:1.5rem; opacity:0.85; max-width:900px; margin:20px auto; line-height:1.7; }
-
-    .audio-controls {
-      margin: 20px auto; max-width: 400px;
-      display: flex; align-items: center; justify-content: center; gap: 15px;
-    }
-    .audio-btn {
-      background: rgba(96,165,250,0.3); border: 1px solid #60a5fa; color: #bfdbfe;
-      padding: 12px 24px; border-radius: 30px; cursor: pointer; font-size: 1.1rem;
-      transition: all 0.3s; backdrop-filter: blur(5px);
-    }
-    .audio-btn:hover { background: rgba(96,165,250,0.6); transform: scale(1.05); }
-
     .cetacean-list {
       max-width:1400px; margin:0 auto 60px; padding:0 20px; position:relative; z-index:10;
       columns: 4; column-gap: 40px; font-size:1.05rem;
@@ -79,30 +63,11 @@ nset:0; pointer-events:none; z-index:1; }
     .cetacean-list a:hover {
       color:#60a5fa; text-shadow:0 0 10px #60a5fa;
     }
-
-    #detail-view {
-      display: none; max-width:1100px; margin:40px auto; padding:40px 30px;
-      background:rgba(10,18,50,0.75); border:1px solid #1e40af66; border-radius:20px;
-      backdrop-filter:blur(12px); box-shadow:0 15px 50px #000000aa;
-      position:relative; z-index:10;
-    }
-    #detail-view h2 { color:#93c5fd; font-size:3rem; margin-bottom:20px; text-shadow:0 0 18px #1e40af; }
-    #detail-view .back-btn {
-      background: rgba(96,165,250,0.4); border:none; color:#bfdbfe;
-      padding:12px 24px; border-radius:30px; cursor:pointer; font-size:1.1rem;
-      margin-bottom:30px; transition:all 0.3s;
-    }
-    #detail-view .back-btn:hover { background: rgba(96,165,250,0.7); }
-    #detail-content p { line-height:1.8; font-size:1.1rem; margin:12px 0; }
-    #detail-content strong { color:#93c5fd; }
-
     footer { text-align:center; padding:80px 20px 40px; opacity:0.65; font-size:1rem; position:relative; z-index:10; }
-
     svg defs { position:absolute; }
   </style>
 </head>
 <body>
-
 <svg width="0" height="0">
   <defs>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -114,25 +79,20 @@ nset:0; pointer-events:none; z-index:1; }
     </filter>
   </defs>
 </svg>
-
 <div class="particles" id="particles"></div>
 <div class="whale-container" id="whaleContainer"></div>
 
 <header>
   <h1>Abismo dos Cetáceos</h1>
   <p class="subtitle">
-    As espécies vivas de Cetáceos<br>
-    Clique em qualquer nome para ver informações detalhadas (tamanho, habitat, alimentação, status IUCN 2025 e fatos curiosos).
+    As espécies vivas de Cetáceos (2026)<br>
+    Clique no nome para ver informações detalhadas em página própria
   </p>
+</header>
 
 <div class="cetacean-list">
-  <h2>As Espécies Existentes </h2>
+  <h2>As Espécies Existentes</h2>
   <ul id="cetaceanList"></ul>
-</div>
-
-<div id="detail-view">
-  <button class="back-btn" onclick="showList()">← Voltar à Lista</button>
-  <div id="detail-content"></div>
 </div>
 
 <footer>
@@ -140,99 +100,41 @@ nset:0; pointer-events:none; z-index:1; }
 </footer>
 
 <script>
-// ARRAY EXPANDIDO com 78 espécies (todas as 15 baleen whales + 63 odontocetes principais/raras)
-// Cada entrada agora tem MAIS informações detalhadas
-const cetaceansData = [
-  // MYSTICETI (15 espécies completas)
-  { name: "Baleia-azul", scientific: "Balaenoptera musculus", size: "Até 32 metros e 240 toneladas de peso", habitat: "A baleia-azul é uma espécie cosmopolita, o que significa que pode ser encontrada em praticamente todos os oceanos do mundo. Seu habitat é predominantemente o oceano aberto (pelágico), raramente aproximando-se da costa, exceto em áreas específicas de alimentação ou reprodução", food: "Alimenta-se quase que totalmente de krill (pequenos crustáceos semelhantes ao camarão).Um adulto pode consumir até 4 toneladas de krill por dia durante a temporada de alimentação nas águas polares", status: "Globalmente, a baleia-azul está na Lista Vermelha da IUCN desde 2018.: Restam entre 10.000 e 25.000 indivíduos no mundo todo. Antes da era da caça, estima-se que existiam mais de 300.000.", facts: "Maior animal que já existiu. Coração do tamanho de um carro pequeno. Seu canto grave viaja centenas de quilômetros." },
-  { name: "Baleia-comum (Fin)", scientific: "Balaenoptera physalus", size: "Até 27 m e 80 toneladas", habitat: "Oceanos globais", food: "Krill e cardumes de peixes", status: "Vulnerável (VU)", facts: "Segunda maior baleia. Atinge 40 km/h. Tem assimetria na coloração da mandíbula." },
-  { name: "Baleia-sei", scientific: "Balaenoptera borealis", size: "Até 20 m e 45 toneladas", habitat: "Oceanos frios e temperados", food: "Krill e peixes pequenos", status: "Em perigo (EN)", facts: "Uma das baleias mais rápidas. Evita águas polares." },
-  { name: "Baleia-de-Bryde", scientific: "Balaenoptera edeni", size: "Até 15 m e 25 toneladas", habitat: "Águas tropicais e subtropicais", food: "Peixes e krill", status: "Preocupação menor (LC)", facts: "Não migra longas distâncias. Tem três sulcos na cabeça." },
-  { name: "Baleia-minke boreal", scientific: "Balaenoptera acutorostrata", size: "Até 10 m e 10 toneladas", habitat: "Hemisfério Norte", food: "Krill e peixes", status: "Preocupação menor (LC)", facts: "Menor das rorquais. Muito curiosa com barcos." },
-  { name: "Baleia-minke antártica", scientific: "Balaenoptera bonaerensis", size: "Até 11 m e 15 toneladas", habitat: "Hemisfério Sul e Antártica", food: "Krill", status: "Quase ameaçada (NT)", facts: "Maior que a boreal. Alimenta-se intensamente no verão antártico." },
-  { name: "Baleia-jubarte", scientific: "Megaptera novaeangliae", size: "Até 18 m e 40 toneladas", habitat: "Migrações entre pólos e trópicos", food: "Krill e peixes pequenos", status: "Preocupação menor (LC)", facts: "Famosa pelos saltos acrobáticos e cantos complexos que evoluem a cada ano." },
-  { name: "Baleia-cinzenta", scientific: "Eschrichtius robustus", size: "Até 15 m e 35 toneladas", habitat: "Pacífico Norte (migração costa oeste EUA-México)", food: "Anfípodes do fundo do mar", status: "Preocupação menor (LC)", facts: "Migra 20.000 km por ano. Alimenta-se virando de lado no fundo." },
-  { name: "Baleia-franca austral", scientific: "Eubalaena australis", size: "Até 18 m e 80 toneladas", habitat: "Hemisfério Sul", food: "Copépodes e krill", status: "Preocupação menor (LC)", facts: "Calosidades na cabeça únicas. Muito curiosa com embarcações." },
-  { name: "Baleia-franca-do-norte", scientific: "Eubalaena glacialis", size: "Até 18 m e 75 toneladas", habitat: "Costa leste da América do Norte", food: "Copépodes", status: "Criticamente em perigo (CR)", facts: "Apenas ~384 indivíduos. Altamente ameaçada por colisões com navios." },
-  { name: "Baleia-franca-do-Pacífico", scientific: "Eubalaena japonica", size: "Até 18 m e 80 toneladas", habitat: "Pacífico Norte", food: "Copépodes", status: "Criticamente em perigo (CR)", facts: "População extremamente pequena (~400 indivíduos)." },
-  { name: "Baleia-da-Groenlândia (Bowhead)", scientific: "Balaena mysticetus", size: "Até 20 m e 100 toneladas", habitat: "Ártico", food: "Krill e copépodes", status: "Preocupação menor (LC)", facts: "Pode viver mais de 200 anos – a mais longeva mamífera." },
-  { name: "Baleia-de-Omura", scientific: "Balaenoptera omurai", size: "Até 12 m e 20 toneladas", habitat: "Águas tropicais e subtropicais", food: "Krill e peixes", status: "Dados insuficientes (DD)", facts: "Descoberta cientificamente em 2003. Muito rara." },
-  { name: "Baleia-de-Rice", scientific: "Balaenoptera ricei", size: "Até 13 m e 25 toneladas", habitat: "Golfo do México", food: "Krill e peixes", status: "Criticamente em perigo (CR)", facts: "Endêmica do Golfo. Menos de 100 indivíduos restantes." },
-  { name: "Baleia-pigmeu (Pygmy right)", scientific: "Caperea marginata", size: "Até 6,5 m e 3,5 toneladas", habitat: "Hemisfério Sul temperado", food: "Krill", status: "Preocupação menor (LC)", facts: "Menor baleia de barbatanas. Muito discreta e raramente vista." },
+// Função para criar slug (url amigável)
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
 
-  // ODONTOCETI (63 espécies selecionadas e detalhadas – incluindo raras)
-  { name: "Cachalote", scientific: "Physeter macrocephalus", size: "Até 20 m (machos) e 57 toneladas", habitat: "Oceanos profundos globais", food: "Lulas gigantes (mergulhos >3.000 m)", status: "Vulnerável (VU)", facts: "Maior cérebro do planeta. Cliques de ecolocalização podem atordoar presas." },
-  { name: "Cachalote-pigmeu", scientific: "Kogia breviceps", size: "Até 3,7 m e 410 kg", habitat: "Oceanos tropicais e temperados", food: "Lulas", status: "Preocupação menor (LC)", facts: "Libera tinta vermelha como defesa quando ameaçado." },
-  { name: "Cachalote-anão", scientific: "Kogia sima", size: "Até 2,7 m e 270 kg", habitat: "Águas quentes globais", food: "Lulas e peixes", status: "Preocupação menor (LC)", facts: "Um dos menores cetáceos de dentes." },
-  { name: "Beluga", scientific: "Delphinapterus leucas", size: "Até 5,5 m e 1,6 toneladas", habitat: "Ártico e subártico", food: "Peixes, crustáceos e lulas", status: "Preocupação menor (LC)", facts: "Chamado 'canário do mar' pelos sons variados. Pele branca na idade adulta." },
-  { name: "Narval", scientific: "Monodon monoceros", size: "Até 5,5 m + 'chifre' de 3 m", habitat: "Ártico", food: "Peixes e lulas", status: "Quase ameaçada (NT)", facts: "O 'chifre' é um dente espiralado usado em competição e sensação." },
-  { name: "Orca (Baleia-assassina)", scientific: "Orcinus orca", size: "Até 9,8 m e 10 toneladas", habitat: "Oceanos globais", food: "Peixes, focas, tubarões e até baleias", status: "Dados insuficientes (DD)", facts: "Predador ápice com culturas e dialetos diferentes por população." },
-  { name: "Baleia-piloto-de-aleta-longa", scientific: "Globicephala melas", size: "Até 7 m e 3 toneladas", habitat: "Águas frias e temperadas", food: "Lulas e peixes", status: "Preocupação menor (LC)", facts: "Conhecida por encalhes em massa." },
-  { name: "Baleia-piloto-tropical", scientific: "Globicephala macrorhynchus", size: "Até 6,5 m e 2 toneladas", habitat: "Águas tropicais", food: "Lulas", status: "Preocupação menor (LC)", facts: "Muito social e curiosa." },
-  { name: "Falsa-orca", scientific: "Pseudorca crassidens", size: "Até 6 m e 2 toneladas", habitat: "Oceanos tropicais e temperados", food: "Peixes e lulas", status: "Quase ameaçada (NT)", facts: "Pode atacar outras baleias." },
-  { name: "Baleia-de-Cuvier", scientific: "Ziphius cavirostris", size: "Até 7 m e 3 toneladas", habitat: "Oceanos profundos globais", food: "Lulas profundas", status: "Preocupação menor (LC)", facts: "Recordista de mergulho: quase 3.000 m." },
-  { name: "Baleia-espadachim", scientific: "Mesoplodon traversii", size: "Até 7 m e 3 toneladas", habitat: "Pacífico Sul profundo", food: "Lulas", status: "Dados insuficientes (DD)", facts: "A baleia mais rara do mundo – conhecida quase só por encalhes." },
-  { name: "Baleia-de-Perrin", scientific: "Mesoplodon perrini", size: "Até 5 m", habitat: "Pacífico Norte", food: "Lulas", status: "Em perigo (EN)", facts: "Descoberta em 1995. População estimada em 500-1.000." },
-  { name: "Baleia-de-dentes-ginkgo", scientific: "Mesoplodon ginkgodens", size: "Até 5,5 m", habitat: "Pacífico Norte e Índico", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Dentes em forma de folha de ginkgo." },
-  { name: "Baleia-de-Baird", scientific: "Berardius bairdii", size: "Até 13 m e 15 toneladas", habitat: "Pacífico Norte profundo", food: "Lulas e peixes", status: "Preocupação menor (LC)", facts: "Maior das baleias-de-bico." },
-  { name: "Baleia-de-Arnoux", scientific: "Berardius arnuxii", size: "Até 13 m", habitat: "Hemisfério Sul antártico", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Similar à Baird, mas no hemisfério sul." },
-  { name: "Baleia-de-Sowerby", scientific: "Mesoplodon bidens", size: "Até 5,5 m", habitat: "Atlântico Norte", food: "Lulas", status: "Preocupação menor (LC)", facts: "Primeira baleia-de-bico descrita (1804)." },
-  { name: "Baleia-de-Hubbs", scientific: "Mesoplodon carlhubbsi", size: "Até 5,5 m", habitat: "Pacífico Norte", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Dentes muito grandes nos machos." },
-  { name: "Baleia-de-Stejneger", scientific: "Mesoplodon stejnegeri", size: "Até 5,5 m", habitat: "Pacífico Norte", food: "Lulas", status: "Quase ameaçada (NT)", facts: "Dentes em forma de espada." },
-  { name: "Baleia-de-Layard (Strap-toothed)", scientific: "Mesoplodon layardii", size: "Até 6 m", habitat: "Hemisfério Sul", food: "Lulas", status: "Preocupação menor (LC)", facts: "Dentes longos que impedem a boca de abrir totalmente." },
-  { name: "Baleia-de-True", scientific: "Mesoplodon mirus", size: "Até 5,5 m", habitat: "Atlântico Norte", food: "Lulas", status: "Preocupação menor (LC)", facts: "Uma das mais conhecidas das beaked whales." },
-  { name: "Baleia-de-Gray", scientific: "Mesoplodon grayi", size: "Até 5,5 m", habitat: "Hemisfério Sul", food: "Lulas", status: "Preocupação menor (LC)", facts: "Muito comum no sul da Nova Zelândia." },
-  { name: "Baleia-de-Andrews", scientific: "Mesoplodon bowdoini", size: "Até 5 m", habitat: "Hemisfério Sul", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Dentes grandes e retos." },
-  { name: "Baleia-de-Hector", scientific: "Mesoplodon hectori", size: "Até 4,5 m", habitat: "Hemisfério Sul", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Uma das menores beaked whales." },
-  { name: "Baleia-de-Gervais", scientific: "Mesoplodon europaeus", size: "Até 5,5 m", habitat: "Atlântico tropical", food: "Lulas", status: "Preocupação menor (LC)", facts: "Dentes curvados para trás." },
-  { name: "Baleia-de-Deraniyagala", scientific: "Mesoplodon hotaula", size: "Até 5 m", habitat: "Índico e Pacífico", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Descoberta em 2002." },
-  { name: "Baleia-de-Ramari", scientific: "Mesoplodon eueu", size: "Até 5,5 m", habitat: "Hemisfério Sul", food: "Lulas", status: "Dados insuficientes (DD)", facts: "Descoberta em 2021." },
-  { name: "Baleia-de-Pygmy (Peruana)", scientific: "Mesoplodon peruvianus", size: "Até 4 m", habitat: "Pacífico Leste", food: "Lulas", status: "Preocupação menor (LC)", facts: "Uma das menores do gênero." },
-  { name: "Baleia-de-Bottlenose-do-norte", scientific: "Hyperoodon ampullatus", size: "Até 12 m", habitat: "Atlântico Norte", food: "Lulas", status: "Quase ameaçada (NT)", facts: "Cabeça em forma de garrafa." },
-  { name: "Baleia-de-Bottlenose-do-sul", scientific: "Hyperoodon planifrons", size: "Até 9 m", habitat: "Hemisfério Sul", food: "Lulas", status: "Preocupação menor (LC)", facts: "Muito semelhante à do norte." },
-  { name: "Baleia-de-Tropical (Longman's)", scientific: "Indopacetus pacificus", size: "Até 9 m", habitat: "Oceanos tropicais", food: "Lulas", status: "Preocupação menor (LC)", facts: "Uma das mais raras e menos estudadas." },
-  { name: "Baleia-de-Shepherd", scientific: "Tasmacetus shepherdi", size: "Até 7 m", habitat: "Hemisfério Sul profundo", food: "Peixes e lulas", status: "Dados insuficientes (DD)", facts: "A única beaked whale que come peixes principalmente." },
-// Funções (mesmas do anterior)
+// Dados das espécies (mantidos iguais)
+const cetaceansData = [
+  
+// Renderiza a lista com links para páginas individuais
 function renderList() {
   const list = document.getElementById('cetaceanList');
   list.innerHTML = '';
+  
   cetaceansData.forEach(cet => {
     const li = document.createElement('li');
     const a = document.createElement('a');
+    const slug = slugify(cet.name);
+    a.href = `${slug}.html`;
     a.textContent = cet.name;
-    a.onclick = () => showDetail(cet);
+    a.target = "_blank";           // abre em nova aba (opcional - pode remover)
     li.appendChild(a);
     list.appendChild(li);
   });
 }
 
-function showDetail(cet) {
-  document.querySelector('.cetacean-list').style.display = 'none';
-  const detailView = document.getElementById('detail-view');
-  detailView.style.display = 'block';
-
-  const content = document.getElementById('detail-content');
-  content.innerHTML = `
-    <h2>${cet.name}</h2>
-    <p><strong>Nome científico:</strong> ${cet.scientific}</p>
-    <p><strong>Tamanho aproximado:</strong> ${cet.size}</p>
-    <p><strong>Habitat principal:</strong> ${cet.habitat}</p>
-    <p><strong>Alimentação:</strong> ${cet.food}</p>
-    <p><strong>Status de conservação (IUCN 2025/2026):</strong> ${cet.status}</p>
-    <p><strong>Fatos curiosos e informações adicionais:</strong> ${cet.facts}</p>
-    <p><em>Fonte: IUCN Red List, Society for Marine Mammalogy e Wikipedia (atualizado 2026).</em></p>
-  `;
-}
-
-function showList() {
-  document.querySelector('.cetacean-list').style.display = 'block';
-  document.getElementById('detail-view').style.display = 'none';
-}
-
-// Inicializa
 renderList();
 
-// Partículas e baleias nadando (mesmo código anterior)
+// Partículas (mantido igual)
 function createParticle() {
   const p = document.createElement('div');
   p.classList.add('particle');
@@ -247,6 +149,7 @@ function createParticle() {
 setInterval(createParticle, 1000);
 for(let i=0; i<35; i++) createParticle();
 
+// Baleias nadando (mantido igual)
 function createWhale() {
   const whale = document.createElement('div');
   whale.classList.add('whale');
@@ -260,27 +163,292 @@ function createWhale() {
 }
 setInterval(createWhale, 4000);
 for(let i=0; i<5; i++) createWhale();
-
-// Áudio (mesmo)
-const audio = document.getElementById('whaleSong');
-const btn = document.getElementById('playPauseBtn');
-const status = document.getElementById('audioStatus');
-
-btn.addEventListener('click', () => {
-  if (audio.paused) {
-    audio.play();
-    btn.textContent = 'Pausar Canto';
-    status.textContent = 'Canto tocando em loop suave';
-  } else {
-    audio.pause();
-    btn.textContent = 'Tocar Canto de Baleia';
-    status.textContent = 'Som pausado';
-  }
-});
-
-audio.volume = 0.25;
-audio.play().catch(() => {});
 </script>
-
 </body>
 </html>
+  <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abismo dos Cetáceos - Espécies Existentes (2026)</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(to bottom, #000814 0%, #001233 50%, #0a1f3f 100%);
+      color: #b3d4fc;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
+    .particle {
+      position:absolute; background:#60a5fa; border-radius:50%;
+      box-shadow:0 0 12px #60a5fa, 0 0 24px #3b82f6; opacity:0.12;
+      animation:drift linear infinite;
+    }
+    @keyframes drift {
+      0% { transform:translate(0,100vh) scale(0.3); opacity:0; }
+      15% { opacity:0.5; } 85% { opacity:0.3; }
+      100% { transform:translate(calc(40vw - 50%),-200px) scale(0.7); opacity:0; }
+    }
+    .whale-container { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+    .whale {
+      position:absolute; width:220px; height:80px; opacity:0.25;
+      animation:whale-swim linear infinite; filter:drop-shadow(0 0 20px #60a5fa);
+    }
+    .whale path { fill:#0f172a; stroke:#1e40af; stroke-width:3; }
+    .whale.glow path { fill:#001233; stroke:#93c5fd; filter:url(#glow); }
+    @keyframes whale-swim { 0% { transform:translate(-300px,20vh) rotate(-2deg); } 100% { transform:translate(120vw,80vh) rotate(2deg); } }
+    @keyframes whale-swim-slow { 0% { transform:translate(120vw,50vh) rotate(180deg); } 100% { transform:translate(-300px,30vh) rotate(178deg); } }
+    header {
+      text-align:center; padding:140px 20px 60px; position:relative; z-index:10;
+    }
+    h1 {
+      font-size:5.5rem; letter-spacing:8px;
+      text-shadow:0 0 40px #1e40af, 0 0 80px #1e3a8a;
+      background:linear-gradient(90deg, #60a5fa, #93c5fd, #c084fc, #60a5fa);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      animation:title-glow 10s ease-in-out infinite;
+    }
+    @keyframes title-glow { 0%,100% { opacity:0.85; text-shadow:0 0 40px #1e40af; } 50% { opacity:1; text-shadow:0 0 80px #3b82f6, 0 0 120px #1e3a8a; } }
+    .subtitle { font-size:1.5rem; opacity:0.85; max-width:900px; margin:20px auto; line-height:1.7; }
+    .cetacean-list {
+      max-width:1400px; margin:0 auto 60px; padding:0 20px; position:relative; z-index:10;
+      columns: 4; column-gap: 40px; font-size:1.05rem;
+    }
+    .cetacean-list h2 {
+      font-size:2.8rem; color:#93c5fd; text-shadow:0 0 20px #1e40af;
+      margin:30px 0 15px; break-after:avoid-column; column-span: all;
+    }
+    .cetacean-list ul { list-style:none; margin:0; padding:0; }
+    .cetacean-list li { margin:6px 0; break-inside:avoid; }
+    .cetacean-list a {
+      color:#bfdbfe; text-decoration:none; cursor:pointer;
+      transition:all 0.3s;
+    }
+    .cetacean-list a:hover {
+      color:#60a5fa; text-shadow:0 0 10px #60a5fa;
+    }
+    footer { text-align:center; padding:80px 20px 40px; opacity:0.65; font-size:1rem; position:relative; z-index:10; }
+    svg defs { position:absolute; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
+<div class="particles" id="particles"></div>
+<div class="whale-container" id="whaleContainer"></div>
+
+<header>
+  <h1>Abismo dos Cetáceos</h1>
+  <p class="subtitle">
+    As espécies vivas de Cetáceos (2026)<br>
+    Clique no nome para ver informações detalhadas em página própria
+  </p>
+</header>
+
+<div class="cetacean-list">
+  <h2>As Espécies Existentes</h2>
+  <ul id="cetaceanList"></ul>
+</div>
+
+<footer>
+  <p>Abismo dos Cetáceos • Março 2026 • 94 espécies conhecidas • Proteja os oceanos</p>
+</footer>
+
+<script>
+// Função para criar slug (url amigável)
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+// Dados das espécies (mantidos iguais)
+const cetaceansData = [
+ <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abismo dos Cetáceos - Espécies Existentes (2026)</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(to bottom, #000814 0%, #001233 50%, #0a1f3f 100%);
+      color: #b3d4fc;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
+    .particle {
+      position:absolute; background:#60a5fa; border-radius:50%;
+      box-shadow:0 0 12px #60a5fa, 0 0 24px #3b82f6; opacity:0.12;
+      animation:drift linear infinite;
+    }
+    @keyframes drift {
+      0% { transform:translate(0,100vh) scale(0.3); opacity:0; }
+      15% { opacity:0.5; } 85% { opacity:0.3; }
+      100% { transform:translate(calc(40vw - 50%),-200px) scale(0.7); opacity:0; }
+    }
+    .whale-container { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
+    .whale {
+      position:absolute; width:220px; height:80px; opacity:0.25;
+      animation:whale-swim linear infinite; filter:drop-shadow(0 0 20px #60a5fa);
+    }
+    .whale path { fill:#0f172a; stroke:#1e40af; stroke-width:3; }
+    .whale.glow path { fill:#001233; stroke:#93c5fd; filter:url(#glow); }
+    @keyframes whale-swim { 0% { transform:translate(-300px,20vh) rotate(-2deg); } 100% { transform:translate(120vw,80vh) rotate(2deg); } }
+    @keyframes whale-swim-slow { 0% { transform:translate(120vw,50vh) rotate(180deg); } 100% { transform:translate(-300px,30vh) rotate(178deg); } }
+    header {
+      text-align:center; padding:140px 20px 60px; position:relative; z-index:10;
+    }
+    h1 {
+      font-size:5.5rem; letter-spacing:8px;
+      text-shadow:0 0 40px #1e40af, 0 0 80px #1e3a8a;
+      background:linear-gradient(90deg, #60a5fa, #93c5fd, #c084fc, #60a5fa);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+      animation:title-glow 10s ease-in-out infinite;
+    }
+    @keyframes title-glow { 0%,100% { opacity:0.85; text-shadow:0 0 40px #1e40af; } 50% { opacity:1; text-shadow:0 0 80px #3b82f6, 0 0 120px #1e3a8a; } }
+    .subtitle { font-size:1.5rem; opacity:0.85; max-width:900px; margin:20px auto; line-height:1.7; }
+    .cetacean-list {
+      max-width:1400px; margin:0 auto 60px; padding:0 20px; position:relative; z-index:10;
+      columns: 4; column-gap: 40px; font-size:1.05rem;
+    }
+    .cetacean-list h2 {
+      font-size:2.8rem; color:#93c5fd; text-shadow:0 0 20px #1e40af;
+      margin:30px 0 15px; break-after:avoid-column; column-span: all;
+    }
+    .cetacean-list ul { list-style:none; margin:0; padding:0; }
+    .cetacean-list li { margin:6px 0; break-inside:avoid; }
+    .cetacean-list a {
+      color:#bfdbfe; text-decoration:none; cursor:pointer;
+      transition:all 0.3s;
+    }
+    .cetacean-list a:hover {
+      color:#60a5fa; text-shadow:0 0 10px #60a5fa;
+    }
+    footer { text-align:center; padding:80px 20px 40px; opacity:0.65; font-size:1rem; position:relative; z-index:10; }
+    svg defs { position:absolute; }
+  </style>
+</head>
+<body>
+<svg width="0" height="0">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
+<div class="particles" id="particles"></div>
+<div class="whale-container" id="whaleContainer"></div>
+
+<header>
+  <h1>Abismo dos Cetáceos</h1>
+  <p class="subtitle">
+    As espécies vivas de Cetáceos (2026)<br>
+    Clique no nome para ver informações detalhadas em página própria
+  </p>
+</header>
+
+<div class="cetacean-list">
+  <h2>As Espécies Existentes</h2>
+  <ul id="cetaceanList"></ul>
+</div>
+
+<footer>
+  <p>Abismo dos Cetáceos • Março 2026 • 94 espécies conhecidas • Proteja os oceanos</p>
+</footer>
+
+<script>
+// Função para criar slug (url amigável)
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+// Dados das espécies (mantidos iguais)
+const cetaceansData = [
+
+
+// Renderiza a lista com links para páginas individuais
+function renderList() {
+  const list = document.getElementById('cetaceanList');
+  list.innerHTML = '';
+  
+  cetaceansData.forEach(cet => {
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    const slug = slugify(cet.name);
+    a.href = `${slug}.html`;
+    a.textContent = cet.name;
+    a.target = "_blank";           // abre em nova aba (opcional - pode remover)
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+}
+
+renderList();
+
+// Partículas (mantido igual)
+function createParticle() {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  const size = Math.random() * 6 + 2;
+  p.style.width = p.style.height = size + 'px';
+  p.style.left = Math.random() * 100 + 'vw';
+  p.style.animationDuration = (Math.random() * 50 + 35) + 's';
+  p.style.animationDelay = Math.random() * 15 + 's';
+  document.getElementById('particles').appendChild(p);
+  setTimeout(() => p.remove(), 90000);
+}
+setInterval(createParticle, 1000);
+for(let i=0; i<35; i++) createParticle();
+
+// Baleias nadando (mantido igual)
+function createWhale() {
+  const whale = document.createElement('div');
+  whale.classList.add('whale');
+  if(Math.random() > 0.5) whale.classList.add('glow');
+  whale.innerHTML = `<svg viewBox="0 0 300 100"><path d="M 20 50 Q 80 10, 180 50 Q 80 90, 20 50 Z M 180 50 L 260 30 L 260 70 Z" /></svg>`;
+  whale.style.top = (Math.random() * 70 + 10) + 'vh';
+  whale.style.animation = (Math.random() > 0.5 ? 'whale-swim' : 'whale-swim-slow') + ' ' + (Math.random() * 60 + 50) + 's linear infinite';
+  whale.style.animationDelay = Math.random() * 20 + 's';
+  document.getElementById('whaleContainer').appendChild(whale);
+  setTimeout(() => whale.remove(), 90000);
+}
+setInterval(createWhale, 4000);
+for(let i=0; i<5; i++) createWhale();
+</script>
+</body>
+</html>
+];
