@@ -145,7 +145,7 @@
 </div>
 
 <footer>
-  <p>Abismo dos Cetáceos • Março 2026 • 94 espécies conhecidas • Proteja os oceanos</p>
+  <p>Abismo dos Misticetos • Março 2026 • 17 espécies conhecidas • Proteja os oceanos</p>
 </footer>
 
 <script>
@@ -225,6 +225,7 @@ function showDetail(cet) {
   document.getElementById('detail-view').style.display = 'block';
   const content = document.getElementById('detail-content');
   content.innerHTML = `
+    <h2>${cet.name}</h2>
     <h2>${cet.name}</h2>
     <p><strong>Nome científico:</strong> ${cet.scientific}</p>
     <p><strong>Tamanho aproximado:</strong> ${cet.size}</p>
