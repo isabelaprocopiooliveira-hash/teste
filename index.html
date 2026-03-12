@@ -119,12 +119,32 @@
 <script>
 // Dados das espécies – COLE AQUI O ARRAY COMPLETO
 const cetaceansData = [
-  // { name: "Baleia-azul", scientific: "Balaenoptera musculus", ... },
-  // ... cole todas as 17 (ou mais) entradas aqui
-  // Exemplo:
-  { name: "Baleia-azul", scientific: "Balaenoptera musculus", size: "Até 30 m e 200 toneladas", habitat: "Oceanos globais, migrações polares", food: "Krill (até 4 toneladas/dia)", status: "Em perigo (EN)", facts: "Maior animal que já existiu. Coração do tamanho de um carro pequeno. Seu canto grave viaja centenas de quilômetros." },
-  // ... restante do array
-];
+ {
+  name: "Baleia-azul",
+  scientific: "Balaenoptera musculus",
+  size: "Até 33 m (máximo confirmado ~29,9–30,5 m), fêmeas geralmente maiores que machos",
+  weight: "Até 200 toneladas (média 110–180 toneladas; recordes históricos ~190–200 t)",
+  habitat: "Todos os oceanos do mundo (exceto Ártico); migrações sazonais entre águas polares (verão/alimentação) e tropicais/equatoriais (inverno/reprodução)",
+  food: "Quase exclusivamente krill (até 4–8 toneladas por dia em indivíduos maiores); filtra grandes volumes de água com barbatanas de barbatana",
+  status: "Em perigo (Endangered – IUCN Red List, última avaliação mantida em 2018 e confirmada em relatórios recentes até 2026)",
+  population: "Estimada em 10.000–25.000 indivíduos totais (5.000–15.000 maduros); populações ainda muito abaixo dos níveis pré-caça comercial",
+  lifespan: "80–90 anos em média (máximo estimado ~110 anos, baseado em camadas de cera auricular)",
+  reproduction: "Maturidade sexual ~5–15 anos (geralmente ~10 anos); gestação 10–12 meses; 1 filhote por vez (~7–8 m e 2–3 toneladas ao nascer); lactação 6–8 meses; nascimento em águas quentes",
+  behavior: "Geralmente solitária ou em pares; grupos pequenos temporários na reprodução/alimentação; nado ~8–22 km/h (até 48 km/h quando alarmada); vocalizações muito potentes (até 188 dB) que viajam centenas ou milhares de km para comunicação e navegação",
+  facts: `O maior animal que já existiu na história da Terra (maior que qualquer dinossauro conhecido). 
+  Coração do tamanho de um carro pequeno (~180 kg, maior de qualquer animal). 
+  Língua pode pesar tanto quanto um elefante (~2,7–3 toneladas). 
+  Aorta grande o suficiente para um humano rastejar por dentro. 
+  Borrifo (esguicho) atinge 6–12 m de altura. 
+  Vocalizações de baixa frequência viajam até 1.000–1.600 km em boas condições oceânicas – um dos sons mais potentes do planeta. 
+  Filtra ~100 toneladas de água por mergulho ao se alimentar. 
+  Migrações anuais podem exceder 10.000–20.000 km. 
+  Sofreu caça intensa no século XX (mais de 360.000 capturadas, especialmente na Antártida); protegida desde 1966 pela Comissão Internacional da Baleia (IWC). 
+  Principais ameaças atuais: colisões com navios, emaranhamento em artes de pesca, ruído oceânico antrópico, mudanças climáticas (afetando krill) e poluição. 
+  Algumas populações (ex.: Pacífico Leste) mostram recuperação lenta (~7% ao ano em certas áreas), mas a subespécie antártica permanece criticamente ameaçada. 
+  Corpo azul-acinzentado com manchas claras; pode parecer amarelado por diatomáceas na pele em águas frias ("sulfur-bottom"). 
+  Barbatanas peitorais longas e estreitas; barbatana dorsal pequena e bem posterior.`
+}
 
 // Funções de lista e detalhes
 function renderList() {
@@ -144,18 +164,22 @@ function showDetail(cet) {
   document.querySelector('.cetacean-list').style.display = 'none';
   document.getElementById('detail-view').style.display = 'block';
   const content = document.getElementById('detail-content');
-  content.innerHTML = `
-    <h2>${cet.name}</h2>
-    <p><strong>Nome científico:</strong> ${cet.scientific}</p>
-    <p><strong>Tamanho aproximado:</strong> ${cet.size}</p>
-    <p><strong>Habitat principal:</strong> ${cet.habitat}</p>
-    <p><strong>Alimentação:</strong> ${cet.food}</p>
-    <p><strong>Status de conservação (IUCN 2025/2026):</strong> ${cet.status}</p>
-    <p><strong>Fatos curiosos:</strong> ${cet.facts}</p>
-    <p><em>Fonte: IUCN Red List, Society for Marine Mammalogy (atualizado 2026).</em></p>
-  `;
+content.innerHTML = `
+  <h2>${cet.name}</h2>
+  <p><strong>Nome científico:</strong> ${cet.scientific}</p>
+  <p><strong>Tamanho:</strong> ${cet.size}</p>
+  <p><strong>Peso:</strong> ${cet.weight || "Até 200 toneladas"}</p>
+  <p><strong>Habitat principal:</strong> ${cet.habitat}</p>
+  <p><strong>Alimentação:</strong> ${cet.food}</p>
+  <p><strong>Status de conservação (IUCN 2025/2026):</strong> ${cet.status}</p>
+  <p><strong>População estimada:</strong> ${cet.population}</p>
+  <p><strong>Longevidade:</strong> ${cet.lifespan}</p>
+  <p><strong>Reprodução:</strong> ${cet.reproduction}</p>
+  <p><strong>Comportamento:</strong> ${cet.behavior}</p>
+  <p><strong>Fatos curiosos:</strong> ${cet.facts}</p>
+  <p><em>Fonte: IUCN Red List, NOAA Fisheries, WWF, National Geographic, Britannica (atualizado 2026).</em></p>
+`;
 }
-
 function showList() {
   document.querySelector('.cetacean-list').style.display = 'block';
   document.getElementById('detail-view').style.display = 'none';
