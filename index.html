@@ -46,18 +46,6 @@
     }
     @keyframes title-glow { 0%,100% { opacity:0.85; text-shadow:0 0 40px #1e40af; } 50% { opacity:1; text-shadow:0 0 80px #3b82f6, 0 0 120px #1e3a8a; } }
     .subtitle { font-size:1.5rem; opacity:0.85; max-width:900px; margin:20px auto; line-height:1.7; }
-    .audio-controls {
-      margin: 30px auto; max-width: 420px;
-      display: flex; align-items: center; justify-content: center; gap: 15px;
-      flex-wrap: wrap;
-    }
-    .audio-btn {
-      background: rgba(96,165,250,0.3); border: 1px solid #60a5fa; color: #bfdbfe;
-      padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 1.1rem;
-      transition: all 0.3s; backdrop-filter: blur(5px);
-    }
-    .audio-btn:hover { background: rgba(96,165,250,0.6); transform: scale(1.05); }
-    #audioStatus { font-size: 1rem; opacity: 0.9; }
     .cetacean-list {
       max-width:1400px; margin:0 auto 60px; padding:0 20px; position:relative; z-index:10;
       columns: 4; column-gap: 40px; font-size:1.05rem;
@@ -92,12 +80,9 @@
     #detail-content strong { color:#93c5fd; }
     footer { text-align:center; padding:80px 20px 40px; opacity:0.65; font-size:1rem; position:relative; z-index:10; }
     svg defs { position:absolute; }
-    /* Player do YouTube invisível */
-    #whalePlayer { position: absolute; left: -9999px; }
   </style>
 </head>
 <body>
-
 <svg width="0" height="0">
   <defs>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -109,101 +94,36 @@
     </filter>
   </defs>
 </svg>
-
 <div class="particles" id="particles"></div>
 <div class="whale-container" id="whaleContainer"></div>
-
 <header>
   <h1>Abismo dos Misticetos</h1>
   <p class="subtitle">
     Todos os Misticetos e suas informações<br>
     Clique em qualquer nome para ver informações detalhadas.
   </p>
-  <div class="audio-controls">
-    <button class="audio-btn" id="playPauseBtn">Tocar Canto de Baleia</button>
-    <span id="audioStatus">Ambiente subaquático ativado (clique para controlar)</span>
-  </div>
 </header>
-
-<!-- Player YouTube invisível -->
-<iframe 
-  id="whalePlayer" 
-  src="https://www.youtube.com/embed/kvDeOi0M2W0?enablejsapi=1&autoplay=0&loop=1&playlist=kvDeOi0M2W0&mute=0&controls=0&modestbranding=1&rel=0&iv_load_policy=3" 
-  frameborder="0" 
-  allow="autoplay; encrypted-media" 
-  allowfullscreen>
-</iframe>
 
 <div class="cetacean-list">
   <h2>As 17 espécies</h2>
   <ul id="cetaceanList"></ul>
 </div>
-
 <div id="detail-view">
   <button class="back-btn" onclick="showList()">← Voltar à Lista</button>
   <div id="detail-content"></div>
 </div>
-
 <footer>
   <p>Abismo dos Misticetos • Março 2026 • 17 espécies conhecidas • Proteja os oceanos</p>
 </footer>
 
 <script>
-// Carrega a API do YouTube
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-let player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('whalePlayer', {
-    events: {
-      'onReady': onPlayerReady,
-      'onStateChange': onPlayerStateChange
-    }
-  });
-}
-
-function onPlayerReady(event) {
-  player.setVolume(25); // volume inicial baixo (0-100)
-  // Descomente abaixo se quiser autoplay ao carregar (pode ser bloqueado em alguns navegadores)
-  // event.target.playVideo();
-}
-
-function onPlayerStateChange(event) {
-  // Pode adicionar lógica extra aqui se quiser
-}
-
-const playPauseBtn = document.getElementById('playPauseBtn');
-const audioStatus = document.getElementById('audioStatus');
-let isPlaying = false;
-
-playPauseBtn.addEventListener('click', () => {
-  if (!player) {
-    audioStatus.textContent = 'Aguarde o player carregar...';
-    return;
-  }
-
-  if (isPlaying) {
-    player.pauseVideo();
-    playPauseBtn.textContent = 'Tocar Canto de Baleia';
-    audioStatus.textContent = 'Som pausado ♪';
-  } else {
-    player.playVideo();
-    playPauseBtn.textContent = 'Pausar Canto de Baleia';
-    audioStatus.textContent = 'Canto de jubarte tocando... 🌊🐋';
-  }
-  isPlaying = !isPlaying;
-});
-
-// Dados das espécies (mantive exatamente como você enviou)
+// Dados das espécies – COLE AQUI O ARRAY COMPLETO
 const cetaceansData = [
-  // ... (colei todo o array que você mandou, mas para economizar espaço aqui no texto, imagine que está completo)
-  // MYSTICETI (15 espécies)
+  // { name: "Baleia-azul", scientific: "Balaenoptera musculus", ... },
+  // ... cole todas as 17 (ou mais) entradas aqui
+  // Exemplo:
   { name: "Baleia-azul", scientific: "Balaenoptera musculus", size: "Até 30 m e 200 toneladas", habitat: "Oceanos globais, migrações polares", food: "Krill (até 4 toneladas/dia)", status: "Em perigo (EN)", facts: "Maior animal que já existiu. Coração do tamanho de um carro pequeno. Seu canto grave viaja centenas de quilômetros." },
-  // ... (todas as outras 77 entradas que você forneceu anteriormente)
-  // (adicione o array completo aqui no seu arquivo)
+  // ... restante do array
 ];
 
 // Funções de lista e detalhes
@@ -225,7 +145,6 @@ function showDetail(cet) {
   document.getElementById('detail-view').style.display = 'block';
   const content = document.getElementById('detail-content');
   content.innerHTML = `
-    <h2>${cet.name}</h2>
     <h2>${cet.name}</h2>
     <p><strong>Nome científico:</strong> ${cet.scientific}</p>
     <p><strong>Tamanho aproximado:</strong> ${cet.size}</p>
@@ -275,9 +194,5 @@ function createWhale() {
 setInterval(createWhale, 4000);
 for(let i=0; i<5; i++) createWhale();
 </script>
-
-<!-- IMPORTANTE: cole o array completo cetaceansData aqui dentro do <script>, no lugar do comentário -->
-<!-- Exemplo: const cetaceansData = [ ... seu array de 78 objetos ... ]; -->
-
 </body>
 </html>
