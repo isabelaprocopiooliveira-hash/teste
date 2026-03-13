@@ -18,6 +18,7 @@
       text-align: center;
       padding: 2.5rem 1rem;
       border-bottom: 4px solid #00aaff;
+      position: relative;
     }
     h1 {
       margin: 0;
@@ -28,6 +29,20 @@
       font-size: 1.2rem;
       opacity: 0.9;
       margin: 0.5rem 0 1.5rem;
+    }
+    .music-player {
+      background: rgba(0, 20, 60, 0.85);
+      padding: 1rem;
+      margin: 1rem auto;
+      max-width: 700px;
+      border-radius: 12px;
+      border: 1px solid #004466;
+      text-align: center;
+    }
+    .music-player p {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      color: #a0d0ff;
     }
     .container {
       max-width: 1100px;
@@ -99,6 +114,24 @@
       font-size: 0.9rem;
       opacity: 0.8;
     }
+    /* Ajuste para o iframe do YouTube */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* Proporção 16:9 */
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+      background: #000;
+      border-radius: 8px;
+      margin: 1rem auto;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
@@ -108,11 +141,27 @@
     <p class="subtitle">As baleias de barbatanas (Mysticeti) • Março 2026 • 14–15 espécies conhecidas</p>
   </header>
 
+  <!-- Player de música (cantos de baleias 528Hz) -->
+  <div class="music-player">
+    <p><strong>Canto das Baleias • 528Hz</strong> – Sons do fundo do mar para relaxar e mergulhar no abismo</p>
+    <p>Ouça os místicos cantos das baleias enquanto explora as espécies abaixo...</p>
+    
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/03ZOMD96OtU?rel=0&modestbranding=1&showinfo=0" 
+        title="Canto das Baleias | Som do fundo do Mar | 528Hz" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
   <div class="container">
 
     <p class="intro">
       Os misticetos são as majestosas baleias que filtram alimento com barbatanas de queratina. 
-      Clique nos nomes para ver informações detalhadas em fontes científicas confiáveis.
+      Deixe os cantos delas ecoarem enquanto clica nos nomes para ver informações detalhadas em fontes científicas confiáveis.
     </p>
 
     <ul class="species-list">
