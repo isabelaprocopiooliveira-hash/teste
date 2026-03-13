@@ -1,222 +1,234 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abismo dos Misticetos</title>
+  <title>Abismo dos Misticetos • Baleias de Barbatanas</title>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
     body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: linear-gradient(to bottom, #000814 0%, #001233 50%, #0a1f3f 100%);
-      color: #b3d4fc;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #0a1f44, #001022);
+      color: #e0f0ff;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
     }
-    .particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
-    .particle {
-      position:absolute; background:#a5d8ff; border-radius:50%;
-      box-shadow:0 0 12px #60a5fa, 0 0 24px #3b82f6; opacity:0.12;
-      animation:drift linear infinite;
-    }
-    @keyframes drift {
-      0% { transform:translate(0,100vh) scale(0.3); opacity:0; }
-      15% { opacity:0.5; } 85% { opacity:0.3; }
-      100% { transform:translate(calc(40vw - 50%),-200px) scale(0.7); opacity:0; }
-    }
-    .whale-container { position:fixed; inset:0; pointer-events:none; z-index:2; overflow:hidden; }
-    .whale {
-      position:absolute; width:220px; height:80px; opacity:0.25;
-      animation:whale-swim linear infinite; filter:drop-shadow(0 0 20px #60a5fa);
-    }
-    .whale path { fill:#0f172a; stroke:#1e40af; stroke-width:3; }
-    .whale.glow path { fill:#001233; stroke:#93c5fd; filter:url(#glow); }
-    @keyframes whale-swim { 0% { transform:translate(-300px,20vh) rotate(-2deg); } 100% { transform:translate(120vw,80vh) rotate(2deg); } }
-    @keyframes whale-swim-slow { 0% { transform:translate(120vw,50vh) rotate(180deg); } 100% { transform:translate(-300px,30vh) rotate(178deg); } }
     header {
-      text-align:center; padding:140px 20px 60px; position:relative; z-index:10;
+      background: rgba(0, 40, 80, 0.9);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-bottom: 4px solid #00aaff;
     }
     h1 {
-      font-size:5.5rem; letter-spacing:8px;
-      text-shadow:0 0 40px #1e40af, 0 0 80px #1e3a8a;
-      background:linear-gradient(90deg, #60a5fa, #93c5fd, #c084fc, #60a5fa);
-      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-      animation:title-glow 10s ease-in-out infinite;
+      margin: 0;
+      font-size: 2.8rem;
+      color: #00d4ff;
     }
-    @keyframes title-glow { 0%,100% { opacity:0.85; text-shadow:0 0 40px #1e40af; } 50% { opacity:1; text-shadow:0 0 80px #3b82f6, 0 0 120px #1e3a8a; } }
-    .subtitle { font-size:1.5rem; opacity:0.85; max-width:900px; margin:20px auto; line-height:1.7; }
-    .cetacean-list {
-      max-width:1400px; margin:0 auto 60px; padding:0 20px; position:relative; z-index:10;
-      columns: 4; column-gap: 40px; font-size:1.05rem;
+    .subtitle {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin: 0.5rem 0 1.5rem;
     }
-    .cetacean-list h2 {
-      font-size:2.8rem; color:#93c5fd; text-shadow:0 0 20px #1e40af;
-      margin:30px 0 15px; break-after:avoid-column; column-span: all;
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
     }
-    .cetacean-list ul { list-style:none; margin:0; padding:0; }
-    .cetacean-list li { margin:6px 0; break-inside:avoid; }
-    .cetacean-list a {
-      color:#bfdbfe; text-decoration:none; cursor:pointer;
-      transition:all 0.3s;
+    .intro {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-size: 1.15rem;
     }
-    .cetacean-list a:hover {
-      color:#60a5fa; text-shadow:0 0 10px #60a5fa;
+    ul.species-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
-    #detail-view {
-      display: none; max-width:1100px; margin:40px auto; padding:40px 30px;
-      background:rgba(10,18,50,0.75); border:1px solid #1e40af66; border-radius:20px;
-      backdrop-filter:blur(12px); box-shadow:0 15px 50px #000000aa;
-      position:relative; z-index:10;
+    li {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 1.4rem;
+      transition: all 0.3s ease;
+      border: 1px solid #004466;
     }
-    #detail-view h2 { color:#93c5fd; font-size:3rem; margin-bottom:20px; text-shadow:0 0 18px #1e40af; }
-    #detail-view .back-btn {
-      background: rgba(96,165,250,0.4); border:none; color:#bfdbfe;
-      padding:12px 24px; border-radius:30px; cursor:pointer; font-size:1.1rem;
-      margin-bottom:30px; transition:all 0.3s;
+    li:hover {
+      transform: translateY(-6px);
+      background: rgba(0, 170, 255, 0.15);
+      border-color: #00aaff;
+      box-shadow: 0 12px 25px rgba(0, 170, 255, 0.25);
     }
-    #detail-view .back-btn:hover { background: rgba(96,165,250,0.7); }
-    #detail-content p { line-height:1.8; font-size:1.1rem; margin:12px 0; }
-    #detail-content strong { color:#93c5fd; }
-    footer { text-align:center; padding:80px 20px 40px; opacity:0.65; font-size:1rem; position:relative; z-index:10; }
-    svg defs { position:absolute; }
+    .species-name {
+      font-size: 1.4rem;
+      margin: 0 0 0.8rem;
+      color: #40c0ff;
+    }
+    .scientific {
+      font-style: italic;
+      opacity: 0.8;
+      font-size: 0.95rem;
+    }
+    .btn {
+      display: inline-block;
+      background: #0066cc;
+      color: white;
+      padding: 0.7rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin-top: 1rem;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #0088ff;
+    }
+    .conservation {
+      text-align: center;
+      margin: 3rem 0;
+      font-size: 1.1rem;
+      padding: 1.5rem;
+      background: rgba(255, 80, 0, 0.15);
+      border-radius: 12px;
+      border: 1px solid #ff6600;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
   </style>
 </head>
 <body>
-<svg width="0" height="0">
-  <defs>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4.5" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-</svg>
-<div class="particles" id="particles"></div>
-<div class="whale-container" id="whaleContainer"></div>
-<header>
-  <h1>Abismo dos Misticetos</h1>
-  <p class="subtitle">
-    Todos os Misticetos e suas informações<br>
-    Clique em qualquer nome para ver informações detalhadas.
-  </p>
-</header>
 
-<div class="cetacean-list">
-  <h2>As 17 espécies</h2>
-  <ul id="cetaceanList"></ul>
-</div>
-<div id="detail-view">
-  <button class="back-btn" onclick="showList()">← Voltar à Lista</button>
-  <div id="detail-content"></div>
-</div>
-<footer>
-  <p>Abismo dos Misticetos • Março 2026 • 17 espécies conhecidas • Proteja os oceanos</p>
-</footer>
+  <header>
+    <h1>Abismo dos Misticetos</h1>
+    <p class="subtitle">As baleias de barbatanas (Mysticeti) • Março 2026 • 14–15 espécies conhecidas</p>
+  </header>
 
-<script>
-// Dados das espécies – COLE AQUI O ARRAY COMPLETO
-const cetaceansData = [
- {
-  name: "Baleia-azul",
-  scientific: "Balaenoptera musculus",
-  size: "Até 33 m (máximo confirmado ~29,9–30,5 m), fêmeas geralmente maiores que machos",
-  weight: "Até 200 toneladas (média 110–180 toneladas; recordes históricos ~190–200 t)",
-  habitat: "Todos os oceanos do mundo (exceto Ártico); migrações sazonais entre águas polares (verão/alimentação) e tropicais/equatoriais (inverno/reprodução)",
-  food: "Quase exclusivamente krill (até 4–8 toneladas por dia em indivíduos maiores); filtra grandes volumes de água com barbatanas de barbatana",
-  status: "Em perigo (Endangered – IUCN Red List, última avaliação mantida em 2018 e confirmada em relatórios recentes até 2026)",
-  population: "Estimada em 10.000–25.000 indivíduos totais (5.000–15.000 maduros); populações ainda muito abaixo dos níveis pré-caça comercial",
-  lifespan: "80–90 anos em média (máximo estimado ~110 anos, baseado em camadas de cera auricular)",
-  reproduction: "Maturidade sexual ~5–15 anos (geralmente ~10 anos); gestação 10–12 meses; 1 filhote por vez (~7–8 m e 2–3 toneladas ao nascer); lactação 6–8 meses; nascimento em águas quentes",
-  behavior: "Geralmente solitária ou em pares; grupos pequenos temporários na reprodução/alimentação; nado ~8–22 km/h (até 48 km/h quando alarmada); vocalizações muito potentes (até 188 dB) que viajam centenas ou milhares de km para comunicação e navegação",
-  facts: `O maior animal que já existiu na história da Terra (maior que qualquer dinossauro conhecido). 
-  Coração do tamanho de um carro pequeno (~180 kg, maior de qualquer animal). 
-  Língua pode pesar tanto quanto um elefante (~2,7–3 toneladas). 
-  Aorta grande o suficiente para um humano rastejar por dentro. 
-  Borrifo (esguicho) atinge 6–12 m de altura. 
-  Vocalizações de baixa frequência viajam até 1.000–1.600 km em boas condições oceânicas – um dos sons mais potentes do planeta. 
-  Filtra ~100 toneladas de água por mergulho ao se alimentar. 
-  Migrações anuais podem exceder 10.000–20.000 km. 
-  Sofreu caça intensa no século XX (mais de 360.000 capturadas, especialmente na Antártida); protegida desde 1966 pela Comissão Internacional da Baleia (IWC). 
-  Principais ameaças atuais: colisões com navios, emaranhamento em artes de pesca, ruído oceânico antrópico, mudanças climáticas (afetando krill) e poluição. 
-  Algumas populações (ex.: Pacífico Leste) mostram recuperação lenta (~7% ao ano em certas áreas), mas a subespécie antártica permanece criticamente ameaçada. 
-  Corpo azul-acinzentado com manchas claras; pode parecer amarelado por diatomáceas na pele em águas frias ("sulfur-bottom"). 
-  Barbatanas peitorais longas e estreitas; barbatana dorsal pequena e bem posterior.`
-}
+  <div class="container">
 
-// Funções de lista e detalhes
-function renderList() {
-  const list = document.getElementById('cetaceanList');
-  list.innerHTML = '';
-  cetaceansData.forEach(cet => {
-    const li = document.createElement('li');
-    const a = document.createElement('a');
-    a.textContent = cet.name;
-    a.onclick = () => showDetail(cet);
-    li.appendChild(a);
-    list.appendChild(li);
-  });
-}
+    <p class="intro">
+      Os misticetos são as majestosas baleias que filtram alimento com barbatanas de queratina. 
+      Clique nos nomes para ver informações detalhadas em fontes científicas confiáveis.
+    </p>
 
-function showDetail(cet) {
-  document.querySelector('.cetacean-list').style.display = 'none';
-  document.getElementById('detail-view').style.display = 'block';
-  const content = document.getElementById('detail-content');
-content.innerHTML = `
-  <h2>${cet.name}</h2>
-  <p><strong>Nome científico:</strong> ${cet.scientific}</p>
-  <p><strong>Tamanho:</strong> ${cet.size}</p>
-  <p><strong>Peso:</strong> ${cet.weight || "Até 200 toneladas"}</p>
-  <p><strong>Habitat principal:</strong> ${cet.habitat}</p>
-  <p><strong>Alimentação:</strong> ${cet.food}</p>
-  <p><strong>Status de conservação (IUCN 2025/2026):</strong> ${cet.status}</p>
-  <p><strong>População estimada:</strong> ${cet.population}</p>
-  <p><strong>Longevidade:</strong> ${cet.lifespan}</p>
-  <p><strong>Reprodução:</strong> ${cet.reproduction}</p>
-  <p><strong>Comportamento:</strong> ${cet.behavior}</p>
-  <p><strong>Fatos curiosos:</strong> ${cet.facts}</p>
-  <p><em>Fonte: IUCN Red List, NOAA Fisheries, WWF, National Geographic, Britannica (atualizado 2026).</em></p>
-`;
-}
-function showList() {
-  document.querySelector('.cetacean-list').style.display = 'block';
-  document.getElementById('detail-view').style.display = 'none';
-}
+    <ul class="species-list">
 
-// Inicializa lista
-renderList();
+      <!-- Família Balaenidae (Right & Bowhead) -->
+      <li>
+        <h3 class="species-name">Baleia-franca-do-norte</h3>
+        <p class="scientific">Eubalaena glacialis</p>
+        <a href="https://www.fisheries.noaa.gov/species/north-atlantic-right-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/41712/162002343" target="_blank" class="btn">IUCN Red List</a>
+      </li>
 
-// Partículas
-function createParticle() {
-  const p = document.createElement('div');
-  p.classList.add('particle');
-  const size = Math.random() * 6 + 2;
-  p.style.width = p.style.height = size + 'px';
-  p.style.left = Math.random() * 100 + 'vw';
-  p.style.animationDuration = (Math.random() * 50 + 35) + 's';
-  p.style.animationDelay = Math.random() * 15 + 's';
-  document.getElementById('particles').appendChild(p);
-  setTimeout(() => p.remove(), 90000);
-}
-setInterval(createParticle, 1000);
-for(let i=0; i<35; i++) createParticle();
+      <li>
+        <h3 class="species-name">Baleia-franca-do-pacífico-norte</h3>
+        <p class="scientific">Eubalaena japonica</p>
+        <a href="https://www.fisheries.noaa.gov/species/north-pacific-right-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/41711/162002206" target="_blank" class="btn">IUCN Red List</a>
+      </li>
 
-// Baleias nadando
-function createWhale() {
-  const whale = document.createElement('div');
-  whale.classList.add('whale');
-  if(Math.random() > 0.5) whale.classList.add('glow');
-  whale.innerHTML = `<svg viewBox="0 0 300 100"><path d="M 20 50 Q 80 10, 180 50 Q 80 90, 20 50 Z M 180 50 L 260 30 L 260 70 Z" /></svg>`;
-  whale.style.top = (Math.random() * 70 + 10) + 'vh';
-  whale.style.animation = (Math.random() > 0.5 ? 'whale-swim' : 'whale-swim-slow') + ' ' + (Math.random() * 60 + 50) + 's linear infinite';
-  whale.style.animationDelay = Math.random() * 20 + 's';
-  document.getElementById('whaleContainer').appendChild(whale);
-  setTimeout(() => whale.remove(), 90000);
-}
-setInterval(createWhale, 4000);
-for(let i=0; i<5; i++) createWhale();
-</script>
+      <li>
+        <h3 class="species-name">Baleia-franca-austral</h3>
+        <p class="scientific">Eubalaena australis</p>
+        <a href="https://www.iucnredlist.org/species/8153/162000850" target="_blank" class="btn">IUCN Red List</a>
+        <a href="https://iwc.int/management-and-conservation" target="_blank" class="btn">IWC – Comissão Internacional da Baleia</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-da-Groenlândia (Bowhead)</h3>
+        <p class="scientific">Balaena mysticetus</p>
+        <a href="https://www.fisheries.noaa.gov/species/bowhead-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/2467/50347682" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <!-- Família Neobalaenidae -->
+      <li>
+        <h3 class="species-name">Baleia-anã-direita</h3>
+        <p class="scientific">Caperea marginata</p>
+        <a href="https://www.iucnredlist.org/species/3778/50349855" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <!-- Família Eschrichtiidae -->
+      <li>
+        <h3 class="species-name">Baleia-cinza</h3>
+        <p class="scientific">Eschrichtius robustus</p>
+        <a href="https://www.fisheries.noaa.gov/species/gray-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/8097/50345475" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <!-- Família Balaenopteridae (Rorquais) -->
+      <li>
+        <h3 class="species-name">Baleia-azul</h3>
+        <p class="scientific">Balaenoptera musculus</p>
+        <a href="https://www.fisheries.noaa.gov/species/blue-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/2477/50347682" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-fin</h3>
+        <p class="scientific">Balaenoptera physalus</p>
+        <a href="https://www.fisheries.noaa.gov/species/fin-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/2478/50347665" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-sei</h3>
+        <p class="scientific">Balaenoptera borealis</p>
+        <a href="https://www.fisheries.noaa.gov/species/sei-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/2479/50347659" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-de-Bryde</h3>
+        <p class="scientific">Balaenoptera edeni / B. brydei</p>
+        <a href="https://www.fisheries.noaa.gov/species/brydes-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/2476/50347673" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-de-Omura</h3>
+        <p class="scientific">Balaenoptera omurai</p>
+        <a href="https://www.iucnredlist.org/species/132948040/132949669" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-minke-comum</h3>
+        <p class="scientific">Balaenoptera acutorostrata</p>
+        <a href="https://www.fisheries.noaa.gov/species/minke-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/2487/50347682" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-minke-antártica</h3>
+        <p class="scientific">Balaenoptera bonaerensis</p>
+        <a href="https://www.iucnredlist.org/species/2481/50347682" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+      <li>
+        <h3 class="species-name">Baleia-jubarte (Humpback)</h3>
+        <p class="scientific">Megaptera novaeangliae</p>
+        <a href="https://www.fisheries.noaa.gov/species/humpback-whale" target="_blank" class="btn">Ver no NOAA Fisheries</a>
+        <a href="https://www.iucnredlist.org/species/13006/162002343" target="_blank" class="btn">IUCN Red List</a>
+      </li>
+
+    </ul>
+
+    <div class="conservation">
+      <strong>Proteja os oceanos!</strong><br>
+      As baleias enfrentam ameaças como emaranhamento em redes, colisões com navios, ruído subaquático e mudanças climáticas. 
+      Apoie organizações de conservação marinha e reduza o plástico nos oceanos.
+    </div>
+
+  </div>
+
+  <footer>
+    Abismo dos Misticetos • Fontes: NOAA Fisheries, IUCN Red List, International Whaling Commission • Atualizado em Março 2026
+  </footer>
+
 </body>
 </html>
